@@ -35,7 +35,7 @@ while True:
         print(usuario, password)
         largousuario = len(usuario)
         largopassword = len(password)
-        sql = "SELECT id FROM usuarios WHERE usuario = '"+ usuario +"' AND password = '" + password + "'"
+        sql = "SELECT id FROM usuario WHERE correo = '"+ usuario +"' AND clave = '" + password + "'"
         largosen = 5+ 1 +len(sql)
         largosen = larstr(largosen)
         sendbd = largosen + "conbd" + "1" + sql
