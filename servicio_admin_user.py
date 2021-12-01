@@ -20,12 +20,12 @@ conex.connect(('localhost', PORT))
 
 conex.send(b'00012sinitOKadusr')
 data = conex.recv(4096)
-print(data.decode())
+print(data.decode("utf-8"))
 
 while True:
     data = conex.recv(4096)
-    print(data.decode())
-    data = data.decode()[5:]
+    print(data.decode("utf-8"))
+    data = data.decode("utf-8")[5:]
     data1 = data[0:5]
     if data1 == "1": #inicio de sesion
         espacio = data.find(' ') #busca el espacio

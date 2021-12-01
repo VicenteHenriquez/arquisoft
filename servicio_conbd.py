@@ -24,11 +24,11 @@ conex.connect(('localhost', PORT))
 
 conex.send(b'00012sinitOKconbd')
 data = conex.recv(4096)
-print(data.decode())
+print(data.decode("utf-8"))
 
 while True:
     data = conex.recv(4096)
-    data = data.decode()[5:]
+    data = data.decode("utf-8")[5:]
     print(data)
     if data[:1] == "1": #corrobora si existe el usuario
         sentencia = data[1:]
