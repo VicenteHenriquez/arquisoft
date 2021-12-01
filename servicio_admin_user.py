@@ -40,12 +40,12 @@ while True:
         largosen = larstr(largosen)
         sendbd = largosen + "conbd" + "1" + sql
         s.send(sendbd.encode("utf-8"))
-        datarec = s.recv(4096)
+        """datarec = s.recv(4096)
         datarec = datarec.decode("utf-8")
         print(datarec)
         resp = datarec[9:]
         resp = "00006"+ "menus" + resp
-        s.send(resp.encode("utf-8"))
+        s.send(resp.encode("utf-8"))"""
 
     elif data1 == "2": #registro de usuario
         pass
