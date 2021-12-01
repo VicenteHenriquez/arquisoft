@@ -15,15 +15,15 @@ def larstr(largo):
     return (largo) 
  
 PORT=5000
-conex = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-conex.connect(('localhost', PORT))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('localhost', PORT))
 
-conex.send(b'00012sinitOKadusr')
-data = conex.recv(4096)
+s.send(b'00010sinitadusr')
+data = s.recv(4096)
 print(data.decode("utf-8"))
 
 while True:
-    data = conex.recv(4096)
+    data = s.recv(4096)
     print(data.decode("utf-8"))
     data = data.decode("utf-8")[5:]
     data1 = data[0:5]
@@ -39,13 +39,13 @@ while True:
         largosen = 5+len(sql)
         largosen = larstr(largosen)
         sendbd = largosen + "conbd" + sql
-        conex.send(sendbd.encode("utf-8"))
-        datarec = conex.recv(4096)
+        s.send(sendbd.encode("utf-8"))
+        datarec = s.recv(4096)
         datarec = datarec.decode("utf-8")
         print(datarec)
         resp = datarec[9:]
         resp = "00001" + resp
-        conex.send(resp.encode("utf-8"))
+        s.send(resp.encode("utf-8"))
 
     elif data1 == "2": #registro de usuario
         pass

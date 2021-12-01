@@ -19,15 +19,15 @@ def larstr(largo):
     return (largo) 
  
 PORT=5000
-conex = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-conex.connect(('localhost', PORT))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('localhost', PORT))
 
-conex.send(b'00012sinitOKconbd')
-data = conex.recv(4096)
+s.send(b'00010sinitconbd')
+data = s.recv(4096)
 print(data.decode("utf-8"))
 
 while True:
-    data = conex.recv(4096)
+    data = s.recv(4096)
     data = data.decode("utf-8")[5:]
     print(data)
     if data[:1] == "1": #corrobora si existe el usuario
@@ -36,8 +36,8 @@ while True:
         resultado = cursor.fetchone()
         resultado = resultado[0]
         if resultado == None:
-            conex.send(b'00006adusrf')
+            s.send(b'00006adusrf')
         else:
-            conex.send(b'00006adusrv')
+            s.send(b'00006adusrv')
     else:
         pass
