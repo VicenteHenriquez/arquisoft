@@ -3,8 +3,7 @@ import socket
 import sys
 #create a socket client
 
-
-host = '192.168.0.3'
+host = 'localhost'
 port = 5000
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))
