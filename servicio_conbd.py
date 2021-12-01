@@ -34,10 +34,12 @@ while True:
         sentencia = data[6:]
         cursor.execute(sentencia)
         resultado = cursor.fetchone()
-        resultado = resultado[0]
-        if resultado == None:
+        resultado = len(resultado)
+        if resultado == 0:
             s.send(b'00006adusrf')
-        else:
+        elif resultado == 1:
             s.send(b'00006adusrv')
+        else:
+            pass
     else:
         pass
