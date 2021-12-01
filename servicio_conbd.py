@@ -30,7 +30,7 @@ while True:
     data = s.recv(4096)
     data = data.decode("utf-8")[5:]
     print(data)
-    if data[:1] == "1": #corrobora si existe el usuario
+    if data[5:6] == "1": #corrobora si existe el usuario
         sentencia = data[1:]
         cursor.execute(sentencia)
         resultado = cursor.fetchone()
