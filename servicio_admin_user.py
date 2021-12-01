@@ -44,7 +44,7 @@ while True:
         datarec = datarec.decode("utf-8")
         print(datarec)
         resp = datarec[9:]
-        #resp = "00001" + resp
+        resp = "00006"+ "menus" + resp
         s.send(resp.encode("utf-8"))
 
     elif data1 == "2": #registro de usuario
