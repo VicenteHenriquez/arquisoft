@@ -4,13 +4,11 @@ import sys
 #create a socket client
 
 
-try:
-    host = '192.168.0.3'
-    port = 5000
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((host, port))
-except socket.error as msg:
-    print("Socket creation error: " + str(msg))
+host = '192.168.0.3'
+port = 5000
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((host, port))
+
 
 def larstr(largo):
     ceros = 5-len(str(largo))
