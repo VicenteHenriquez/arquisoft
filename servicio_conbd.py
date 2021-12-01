@@ -37,9 +37,9 @@ while True:
         resultado = cursor.fetchone()
         #resultado = len(resultado)
         if resultado == None:
-            s.send(b'00006menusf')
+            s.send(b'00006adusrf')
         elif resultado == 1:
-            s.send(b'00006menusv')
+            s.send(b'00006adusrv')
         else:
             pass
     else:
