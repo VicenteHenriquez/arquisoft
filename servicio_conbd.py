@@ -34,8 +34,8 @@ while True:
         sentencia = data[6:]
         cursor.execute(sentencia)
         resultado = cursor.fetchone()
-        resultado = len(resultado)
-        if resultado == 0:
+        #resultado = len(resultado)
+        if resultado == None:
             s.send(b'00006adusrf')
         elif resultado == 1:
             s.send(b'00006adusrv')
