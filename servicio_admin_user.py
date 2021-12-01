@@ -26,7 +26,7 @@ while True:
     data = s.recv(4096)
     print(data.decode("utf-8"))
     data = data.decode("utf-8")[5:]
-    data1 = data[0:5]
+    data1 = data[5:6]
     if data1 == "1": #inicio de sesion
         espacio = data.find(' ') #busca el espacio
         servicio = data[0:5] #define servicio
