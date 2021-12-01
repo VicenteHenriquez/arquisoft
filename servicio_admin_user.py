@@ -33,7 +33,20 @@ while True:
         usuario = data[5:espacio] #define usuario
         password = data[espacio+1:] #define password
         print(usuario, password)
-        
+        largousuario = len(usuario)
+        largopassword = len(password)
+        sql = "SELECT id FROM usuarios WHERE usuario = '"+ usuario +"' AND password = '" + password + "'"
+        largosen = 5+len(sql)
+        largosen = larstr(largosen)
+        sendbd = largosen + "conbd" + sql
+        conex.send(sendbd.encode("utf-8"))
+        datarec = conex.recv(4096)
+        datarec = datarec.decode("utf-8")
+        print(datarec)
+        resp = datarec[9:]
+        resp = "00001" + resp
+        conex.send(resp.encode("utf-8"))
+
     elif data1 == "2": #registro de usuario
         pass
     else:

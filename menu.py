@@ -5,9 +5,6 @@ import sys
 
 
 try:
-    global host
-    global port
-    global s
     host = '192.168.0.3'
     port = 5000
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -47,10 +44,10 @@ def menu_4_options():
             print(resp.decode("utf-8"))
             respuesta = resp.decode("utf-8")
             respuesta = respuesta[5:]
-            if respuesta == "True":
+            if respuesta == "v":
                 user = correo
                 menu_sesionini(user)
-            elif respuesta == "False":
+            elif respuesta == "f":
                 print("Correo o contraseña incorrecta")
             else:
                 print("Error")

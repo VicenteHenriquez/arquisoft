@@ -28,6 +28,16 @@ print(data.decode())
 
 while True:
     data = conex.recv(4096)
-    data = data.decode()
+    data = data.decode()[5:]
     print(data)
-    
+    if data[:1] == "1": #corrobora si existe el usuario
+        sentencia = data[1:]
+        cursor.execute(sentencia)
+        resultado = cursor.fetchone()
+        resultado = resultado[0]
+        if resultado == None:
+            conex.send(b'00006adusrf')
+        else:
+            conex.send(b'00006adusrv')
+    else:
+        pass
