@@ -32,6 +32,7 @@ while True:
     print(data)
     if data[5:6] == "1": #corrobora si existe el usuario
         sentencia = data[6:]
+        print(sentencia)
         cursor.execute(sentencia)
         resultado = cursor.fetchone()
         #resultado = len(resultado)
