@@ -7,8 +7,7 @@ host = 'localhost'
 port = 5000
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))
-s.send(b'00010menus')
-data = s.recv(4096)
+
 
 
 def larstr(largo):
