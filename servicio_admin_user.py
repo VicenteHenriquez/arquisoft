@@ -30,15 +30,15 @@ while True:
     if data1 == "1": #inicio de sesion
         espacio = data.find(' ') #busca el espacio
         servicio = data[0:5] #define servicio
-        usuario = data[5:espacio] #define usuario
+        usuario = data[6:espacio] #define usuario
         password = data[espacio+1:] #define password
         print(usuario, password)
         largousuario = len(usuario)
         largopassword = len(password)
         sql = "SELECT id FROM usuarios WHERE usuario = '"+ usuario +"' AND password = '" + password + "'"
-        largosen = 5+len(sql)
+        largosen = 5+ 1 +len(sql)
         largosen = larstr(largosen)
-        sendbd = largosen + "conbd" + sql
+        sendbd = largosen + "conbd" + "1" + sql
         s.send(sendbd.encode("utf-8"))
         datarec = s.recv(4096)
         datarec = datarec.decode("utf-8")
