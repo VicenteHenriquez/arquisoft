@@ -41,7 +41,7 @@ def menu_4_options():
             resp = s.recv(4096)
             print(resp.decode("utf-8"))
             respuesta = resp.decode("utf-8")
-            respuesta = respuesta[9:]
+            respuesta = respuesta[10:]
             if respuesta == "v":
                 user = correo
                 menu_sesionini(user)
