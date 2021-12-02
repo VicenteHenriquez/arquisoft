@@ -45,7 +45,8 @@ while True:
         sentencia = data[6:].split("---")
         sentencia1 = sentencia[0] #excluimos la sentencia 1(insert)
         sentencia2 = sentencia[1] #excluimos la sentencia 2(select)
-        print(sentencia)
+        print(sentencia1)
+        print(sentencia2)
         try:
             cursor.execute(sentencia2) #ejecutamos la sentencia 1 para saber si el correo ya esta en uso
             resultado = cursor.fetchone() #obtenemos el resultado

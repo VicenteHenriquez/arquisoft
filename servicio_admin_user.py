@@ -50,6 +50,7 @@ while True:
     elif data1 == "2": #registro de usuario
         espacios = data.split(',')
         nombre = espacios[0]
+        nombre = nombre[6:]
         correo = espacios[1]
         establecimiento = espacios[2]
         clave = espacios[3]
