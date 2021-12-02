@@ -101,10 +101,13 @@ def menu_sesionini(user):
         respuesta = resp.decode("utf-8")
         respuesta = respuesta[12:]
         respuesta = respuesta.split("---")
+        print("----------------------------------------------------------")
         print("Nombre: " + respuesta[0])
         print("Correo: " + respuesta[1])
         print("Establecimiento: " + respuesta[2])
         print("Clave: " + respuesta[3])
+        print("----------------------------------------------------------")
+        return menu_sesionini(user)
     elif choice == 2:
         pass
     elif choice == 3:
