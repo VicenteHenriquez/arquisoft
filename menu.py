@@ -31,8 +31,8 @@ def menu_4_options():
         3. Salir
         """)
         print("----------------------------------------------------------")
-        choice = int(input("Elija la opción correspondiente: "))
-        if choice == 1:#iniciar sesion
+        choice = input("Elija la opción correspondiente: ")
+        if choice == "1":#iniciar sesion
             print("----------------------------------------------------------")
             print("Iniciar sesion")
             correo = input("Correo: ")
@@ -52,7 +52,7 @@ def menu_4_options():
                 print("Correo o contraseña incorrecta")
             else:
                 print("Error")
-        elif choice == 2: #registrar
+        elif choice == "2": #registrar
             print("Ingrese su nombre y apellido: ")
             nombre = str(input())
             print("Ingrese su correo: ")
@@ -79,7 +79,7 @@ def menu_4_options():
                     print("Error")
             else:
                 print("Las contraseñas no coinciden")
-        elif choice == 3:
+        elif choice == "3":
             print("Saliendo...Muchas gracias por utilizar nuestros servicios")
             sys.exit()
         else:
