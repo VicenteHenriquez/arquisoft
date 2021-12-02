@@ -147,13 +147,33 @@ def menu_ramos(user):
         respuesta = respuesta[12:]
         respuesta = respuesta.split("), (")
         largresp = len(respuesta)
+        print("----------------------------------------------------------")
         for i in range(len(respuesta)):
             if i == largresp-1:
                 print(respuesta[i].strip(")]"))
             else:
                 print(respuesta[i])
-        print(respuesta)
         print("----------------------------------------------------------")
+        print("Escriba el numero del ramo que desea ver: ")
+        idramo = input()
+        if idramo.isnumeric() == False:
+            print("Ramo no encontrado")
+            return menu_ramos(user)
+        else:
+            largo = 5 + 1 + len(usuario) + 1 + len(idramo)
+            texto = larstr(largo) + "adram" + "2" + usuario + "," + idramo
+            s.send(texto.encode("utf-8"))
+            resp = s.recv(4096)
+            respuesta = resp.decode("utf-8")
+            respuesta = respuesta[12:]
+            respuesta = respuesta.split("---")
+            print(respuesta)
+            print("----------------------------------------------------------")
+            print("Nombre: " + respuesta[0])
+            print("Descripción: " + respuesta[1])
+            print("Profesor: " + respuesta[2])
+            print("----------------------------------------------------------")
+            return menu_ramos(user)
 
     elif choice == 2: #agregar ramo
         print("----------------------------------------------------------")

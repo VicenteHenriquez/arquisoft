@@ -58,3 +58,17 @@ while True:
         s.send(resp.encode("utf-8"))
     elif data1 == "3": #eliminar un ramo
         pass
+    elif data1 == "4": #ver ramo en especifico
+        datos = data.split(",")
+        usuario = datos[0][6:]
+        idramo = datos[1]
+        sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
+        largosql = 5 + 1 + len(sql) + 3 + len(idramo)
+        enviartxt = larstr(largosql) + "conbd" + "4" + sql + "---" + idramo
+        s.send(enviartxt.encode("utf-8"))
+        datarec = s.recv(4096)
+        data = datarec.decode("utf-8")
+        data = data[12:]
+        largo = 5 + len(data)
+        largo = larstr(largo) + "adram" + data
+        s.send(largo.encode("utf-8"))

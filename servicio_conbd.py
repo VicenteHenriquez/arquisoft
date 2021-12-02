@@ -42,6 +42,7 @@ while True:
             s.send(b'00006conbdv')
         else:
             pass
+    
     elif data[5:6] == "2": #registro de usuario
         sentencia = data[6:].split("---")
         sentencia1 = sentencia[0] #excluimos la sentencia 1(insert)
@@ -60,6 +61,7 @@ while True:
         except:
             conn.rollback()
             s.send(b'00006conbde')
+    
     elif data[5:6] == "3": #consulta de usuario
         sentencia = data[6:] #excluimos la sentencia
         print(sentencia)
@@ -73,6 +75,7 @@ while True:
         enviar = larstr(largo) + "conbd" + nombre + "---" + correo + "---" + establecimiento + "---" + clave
         print(enviar)
         s.send(enviar.encode("utf-8"))
+    
     elif data[5:6] == "4": #consulta de ramos
         sentencia = data[6:] #excluimos la sentencia
         print(sentencia)
@@ -86,6 +89,7 @@ while True:
         largo = 5 + len(resultado)
         enviar = larstr(largo) + "conbd" + str(resultado)
         s.send(enviar.encode("utf-8"))
+    
     elif data[5:6] == "5": #agregar ramo
         datos = data[6:].split("---")
         print(datos)
@@ -145,4 +149,22 @@ while True:
                     s.send(b'00006conbde')
             else: #ya existe el curso
                 s.send(b'00006conbdy')
-        
+    
+    elif data[5:6] == "6": #consulta ramo en particular
+        data = data[6:].split("---")
+        sentencia = data[0]
+        idramo = data[1]
+        cursor.execute(sentencia)
+        idusuario = cursor.fetchone()[0]
+        sentencia1 = "SELECT ramos.nombre, descripcion, profesor FROM cursos,ramos WHERE idusuario ='"+ idusuario +"' AND cursos.idramo = ramos.id and ramos.id = '"+ idramo +"'"
+        cursor.execute(sentencia1)
+        resultado = cursor.fetchone()
+        if resultado == None:
+            s.send(b'00006conbde')
+        else:
+            nombre = resultado[0]
+            descripcion = resultado[1]
+            profesor = resultado[2]
+            largo = 5 + len(nombre) + 3 + len(descripcion) + 3 + len(profesor)
+            enviar = larstr(largo) + "conbd" + nombre + "---" + descripcion + "---" + profesor
+            s.send(enviar.encode("utf-8"))
