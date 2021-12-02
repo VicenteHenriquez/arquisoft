@@ -85,7 +85,9 @@ while True:
         cursor.execute(sentencia)
         idusuario = cursor.fetchone()
         idusuario = int(idusuario[0])
+        print(idusuario)
         sentencia2 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
+        print(sentencia2)
         cursor.execute(sentencia2)
         ramo = cursor.fetchone()
         if ramo == None: #no existe el ramo
