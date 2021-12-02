@@ -99,6 +99,7 @@ while True:
             except:
                 conn.rollback()
                 s.send(b'00006conbde')
+            cursor = conn.cursor()
             sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
             print(sentencia4)
             cursor.execute(sentencia4)
@@ -114,16 +115,15 @@ while True:
                 conn.rollback()
                 s.send(b'00006conbde')
         else: #existe el ramo
-            sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'" #obtenemos el id del ramo
-            cursor.execute(sentencia4)
-            idramo = cursor.fetchone() #obtenemos el id del ramo
-            idramo = int(idramo[0])
+            idramo = int(ramo[0])
             try: #insertamos el curso
                 sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + idusuario + ", " + idramo + ", '" + descurso + "', '" + profesor + "')"
+                print(sentencia5)
                 cursor.execute(sentencia5)
                 conn.commit()
                 s.send(b'00006conbda')
             except: #error
+                print("error")
                 conn.rollback()
                 s.send(b'00006conbde')
         
