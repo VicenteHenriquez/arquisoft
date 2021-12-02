@@ -153,10 +153,10 @@ while True:
     elif data[5:6] == "6": #consulta ramo en particular
         data = data[6:].split("---")
         sentencia = data[0]
-        idramo = data[1]
+        idcurso = data[1]
         cursor.execute(sentencia)
         idusuario = cursor.fetchone()[0]
-        sentencia1 = "SELECT ramos.nombre, descripcion, profesor FROM cursos,ramos WHERE idusuario ='"+ str(idusuario) +"' AND cursos.idramo = ramos.id and ramos.id = '"+ str(idramo) +"'"
+        sentencia1 = "SELECT ramos.nombre, descripcion, profesor FROM cursos,ramos WHERE idusuario ='"+ str(idusuario) +"' AND cursos.idramo = ramos.id and cursos.id = '"+ str(idcurso) +"'"
         cursor.execute(sentencia1)
         resultado = cursor.fetchone()
         if resultado == None:
