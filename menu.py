@@ -161,7 +161,7 @@ def menu_ramos(user):
             return menu_ramos(user)
         else:
             largo = 5 + 1 + len(usuario) + 1 + len(idramo)
-            texto = larstr(largo) + "adram" + "2" + usuario + "," + idramo
+            texto = larstr(largo) + "adram" + "4" + usuario + "," + idramo
             s.send(texto.encode("utf-8"))
             resp = s.recv(4096)
             respuesta = resp.decode("utf-8")
