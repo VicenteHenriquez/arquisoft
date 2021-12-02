@@ -83,7 +83,8 @@ while True:
         profesor = datos[3]
         sentencia = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         cursor.execute(sentencia)
-        idusuario = cursor.fetchone()[0]
+        idusuario = cursor.fetchone()
+        idusuario = idusuario[0]
         sentencia2 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
         cursor.execute(sentencia2)
         ramo = cursor.fetchone()
@@ -100,7 +101,8 @@ while True:
             idramo = cursor.fetchone()
             idramo = idramo[0]
             try: #insertamos el curso
-                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + int(idusuario) + ", " + int(idramo) + ", '" + descurso + "', '" + profesor + "')"
+                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES ("+ idusuario + ", "+ idramo + ", '" + descurso + "', '" + profesor + "')"
+                print(sentencia5)
                 cursor.execute(sentencia5)
                 conn.commit()
                 s.send(b'00006conbda')
