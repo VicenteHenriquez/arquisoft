@@ -74,7 +74,18 @@ while True:
         print(enviar)
         s.send(enviar.encode("utf-8"))
     elif data[5:6] == "4": #consulta de ramos
-        pass
+        sentencia = data[6:] #excluimos la sentencia
+        print(sentencia)
+        cursor.execute(sentencia) #ejecutamos la sentencia
+        idusuario = cursor.fetchone()[0]
+        sentencia = "SELECT cursos.id , ramos.nombre FROM cursos,ramos WHERE cursos.idramo = ramos.id AND idusuario = " + str(idusuario) + "" 
+        print(sentencia)
+        cursor.execute(sentencia) #ejecutamos la sentencia
+        resultado = cursor.fetchall() #obtenemos los resultados
+        print(resultado)
+        largo = 5 + len(resultado)
+        enviar = larstr(largo) + "conbd" + str(resultado)
+        s.send(enviar.encode("utf-8"))
     elif data[5:6] == "5": #agregar ramo
         datos = data[6:].split("---")
         print(datos)
@@ -118,14 +129,20 @@ while True:
         else: #existe el ramo
             idramo = int(ramo[0])
             print(idramo)
-            try: #insertamos el curso
-                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + str(idusuario) + ", " + str(idramo) + ", '" + descurso + "', '" + profesor + "')"
-                print(sentencia5)
-                cursor.execute(sentencia5)
-                conn.commit()
-                s.send(b'00006conbda')
-            except Error: #error
-                print("Error:", Error)
-                conn.rollback()
-                s.send(b'00006conbde')
+            sentcursos = "SELECT id FROM cursos WHERE idusuario = " + str(idusuario) + " AND idramo = " + str(idramo) + ""
+            cursor.execute(sentcursos)
+            curso = cursor.fetchone()
+            if curso == None: #no existe el curso con ese alumno
+                try: #insertamos el curso , falta que el curso ya esta inscrito
+                    sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + str(idusuario) + ", " + str(idramo) + ", '" + descurso + "', '" + profesor + "')"
+                    print(sentencia5)
+                    cursor.execute(sentencia5)
+                    conn.commit()
+                    s.send(b'00006conbda')
+                except Error: #error
+                    print("Error:", Error)
+                    conn.rollback()
+                    s.send(b'00006conbde')
+            else: #ya existe el curso
+                s.send(b'00006conbdy')
         

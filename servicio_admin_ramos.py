@@ -29,7 +29,18 @@ while True:
     data = data.decode("utf-8")[5:]
     data1 = data[5:6]
     if data1 == "1": #vista de los ramos inscritos
-        pass
+        usuario = data[6:]
+        sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
+        largosql = 5 + 1 + len(sql)
+        largosql = larstr(largosql)
+        senbd = largosql + "conbd" + "4" + sql
+        s.send(senbd.encode("utf-8"))
+        data = s.recv(4096)
+        data = data.decode("utf-8")[12:]
+        print(data)
+        largo = 5 + len(data)
+        largo = larstr(largo) + "adram" + data
+        s.send(largo.encode("utf-8"))
     elif data1 == "2": #agregar un ramo
         datos = data[6:].split("---")
         usuario = datos[0]

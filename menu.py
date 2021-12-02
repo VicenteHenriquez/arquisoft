@@ -135,7 +135,16 @@ def menu_ramos(user):
     print("----------------------------------------------------------")
     choice = int(input("Elija la opción correspondiente: "))
     if choice == 1:
-        pass
+        usuario = user
+        largo = 5 + 1 + len(usuario)
+        texto = larstr(largo) + "adram" + "1" + usuario
+        s.send(texto.encode("utf-8"))
+        resp = s.recv(4096)
+        respuesta = resp.decode("utf-8")
+        respuesta = respuesta[12:]
+        print(respuesta)
+        print("----------------------------------------------------------")
+
     elif choice == 2:
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DEL RAMO")
@@ -159,6 +168,9 @@ def menu_ramos(user):
             return menu_ramos(user)
         elif respuesta == "e":
             print("Error al agregar ramo")
+            return menu_ramos(user)
+        elif respuesta == "y":
+            print("Ramo ya existente")
             return menu_ramos(user)
         else:
             print("Error")
