@@ -97,7 +97,8 @@ while True:
                 s.send(b'00006conbde')
             sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
             cursor.execute(sentencia4)
-            idramo = cursor.fetchone()[0]
+            idramo = cursor.fetchone()
+            idramo = idramo[0]
             try: #insertamos el curso
                 sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + int(idusuario) + ", " + int(idramo) + ", '" + descurso + "', '" + profesor + "')"
                 cursor.execute(sentencia5)
