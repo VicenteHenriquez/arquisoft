@@ -168,3 +168,6 @@ while True:
             largo = 5 + len(nombre) + 3 + len(descripcion) + 3 + len(profesor)
             enviar = larstr(largo) + "conbd" + nombre + "---" + descripcion + "---" + profesor
             s.send(enviar.encode("utf-8"))
+    
+    elif data[5:6] == "7": #eliminar curso
+        pass

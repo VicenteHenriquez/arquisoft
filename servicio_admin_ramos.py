@@ -56,7 +56,7 @@ while True:
         resp = data[12:]
         resp = "00006" + "adram" + resp
         s.send(resp.encode("utf-8"))
-    elif data1 == "3": #eliminar un ramo
+    elif data1 == "3": #eliminar un curso
         pass
     elif data1 == "4": #ver ramo en especifico
         datos = data.split(",")
