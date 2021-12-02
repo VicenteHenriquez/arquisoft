@@ -143,7 +143,7 @@ def menu_ramos(user):
         respuesta = resp.decode("utf-8")
         respuesta = respuesta[12:]
         for i in respuesta:
-            print(i)
+            print(respuesta[i])
         print(respuesta)
         print("----------------------------------------------------------")
 
