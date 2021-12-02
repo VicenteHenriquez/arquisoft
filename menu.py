@@ -134,7 +134,7 @@ def menu_ramos(user):
     """)
     print("----------------------------------------------------------")
     choice = int(input("Elija la opción correspondiente: "))
-    if choice == 1:
+    if choice == 1: #ver ramos
         usuario = user
         largo = 5 + 1 + len(usuario)
         texto = larstr(largo) + "adram" + "1" + usuario
@@ -145,7 +145,7 @@ def menu_ramos(user):
         print(respuesta)
         print("----------------------------------------------------------")
 
-    elif choice == 2:
+    elif choice == 2: #agregar ramo
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DEL RAMO")
         print("Nombre: ")
@@ -175,9 +175,9 @@ def menu_ramos(user):
         else:
             print("Error")
             return menu_ramos(user)
-    elif choice == 3:
+    elif choice == 3: #eliminar ramo
         pass
-    elif choice == 4:
+    elif choice == 4: #volver
         menu_sesionini(user)
     return menu_ramos(user)
 
