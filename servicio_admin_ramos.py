@@ -64,11 +64,12 @@ while True:
         idramo = datos[1]
         sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         largosql = 5 + 1 + len(sql) + 3 + len(idramo)
-        enviartxt = larstr(largosql) + "conbd" + "4" + sql + "---" + idramo
+        enviartxt = larstr(largosql) + "conbd" + "6" + sql + "---" + idramo
         s.send(enviartxt.encode("utf-8"))
         datarec = s.recv(4096)
         data = datarec.decode("utf-8")
         data = data[12:]
         largo = 5 + len(data)
         largo = larstr(largo) + "adram" + data
+        print(largo)
         s.send(largo.encode("utf-8"))
