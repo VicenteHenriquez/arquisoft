@@ -75,7 +75,7 @@ while True:
         sendbd = largosen + "conbd" + "3" + sql
         s.send(sendbd.encode("utf-8")) #enviamos a servicio_conbd.py
         datarec = s.recv(4096) #recibimos respuesta
-        datarec = datarec.decode("utf-8")
+        datarec = datarec.decode("utf-8")[12:] #quitamos 00008conbdOK
         print(datarec)
         largo = 5 + len(datarec)
         enviar = larstr(largo) + "adusr" + datarec
