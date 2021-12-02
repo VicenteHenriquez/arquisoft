@@ -36,7 +36,7 @@ while True:
         senbd = largosql + "conbd" + "4" + sql
         s.send(senbd.encode("utf-8"))
         data = s.recv(4096)
-        data = data.decode("utf-8")[12:]
+        data = data.decode("utf-8")[14:]
         print(data)
         largo = 5 + len(data)
         largo = larstr(largo) + "adram" + data
