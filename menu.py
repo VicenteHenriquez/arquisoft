@@ -123,6 +123,9 @@ def menu_sesionini(user):
     elif choice == 5:
         print("Cerrando sesion...")
         return menu_4_options()
+    else:
+        print("Opción incorrecta")
+        return menu_sesionini(user)
 
 def menu_ramos(user):
     print("----------------------------------------------------------")
@@ -186,6 +189,8 @@ def menu_ramos(user):
         pass
     elif choice == 4: #volver
         menu_sesionini(user)
+    else:
+        pass
     return menu_ramos(user)
 
 
