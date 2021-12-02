@@ -116,6 +116,7 @@ while True:
                 s.send(b'00006conbde')
         else: #existe el ramo
             idramo = int(ramo[0])
+            print(idramo)
             try: #insertamos el curso
                 sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + idusuario + ", " + idramo + ", '" + descurso + "', '" + profesor + "')"
                 print(sentencia5)
