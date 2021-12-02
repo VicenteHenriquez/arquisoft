@@ -179,6 +179,7 @@ def menu_ramos(user):
         pass
     elif choice == 4:
         menu_sesionini(user)
+    return menu_ramos(user)
 
 
 menu_4_options()    
