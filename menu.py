@@ -143,6 +143,12 @@ def menu_ramos(user):
         respuesta = resp.decode("utf-8")
         respuesta = respuesta[12:]
         respuesta = respuesta.split("), (")
+        largresp = len(respuesta)
+        for i in range(len(respuesta)-1):
+            if i == largresp:
+                print(respuesta[i].strip(")]"))
+            else:
+                print(respuesta[i])
         print(respuesta)
         print("----------------------------------------------------------")
 
