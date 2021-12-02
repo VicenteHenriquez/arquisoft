@@ -72,3 +72,50 @@ while True:
         enviar = larstr(largo) + "conbd" + nombre + "---" + correo + "---" + establecimiento + "---" + clave
         print(enviar)
         s.send(enviar.encode("utf-8"))
+    elif data[5:6] == "4": #consulta de ramos
+        pass
+    elif data[5:6] == "5": #agregar ramo
+        datos = data[6:].split("---")
+        print(datos)
+        usuario = datos[0]
+        nombreram = datos[1]
+        descurso = datos[2]
+        profesor = datos[3]
+        sentencia = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
+        cursor.execute(sentencia)
+        idusuario = cursor.fetchone()[0]
+        sentencia2 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
+        cursor.execute(sentencia2)
+        ramo = cursor.fetchone()
+        if ramo == None: #no existe el ramo
+            try:
+                sentencia3 = "INSERT INTO ramos (nombre) VALUES ('" + nombreram + "')"
+                cursor.execute(sentencia4)
+                conn.commit()
+            except:
+                conn.rollback()
+                s.send(b'00006conbde')
+            sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
+            cursor.execute(sentencia4)
+            idramo = cursor.fetchone()[0]
+            try: #insertamos el curso
+                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + int(idusuario) + ", " + int(idramo) + ", '" + descurso + "', '" + profesor + "')"
+                cursor.execute(sentencia5)
+                conn.commit()
+                s.send(b'00006conbda')
+            except: #hubo un error
+                conn.rollback()
+                s.send(b'00006conbde')
+        else: #existe el ramo
+            sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'" #obtenemos el id del ramo
+            cursor.execute(sentencia4)
+            idramo = cursor.fetchone()[0] #obtenemos el id del ramo
+            try: #insertamos el curso
+                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + int(idusuario) + ", " + int(idramo) + ", '" + descurso + "', '" + profesor + "')"
+                cursor.execute(sentencia5)
+                conn.commit()
+                s.send(b'00006conbda')
+            except: #error
+                conn.rollback()
+                s.send(b'00006conbde')
+        

@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import socket
 import sys
 #create a socket client
@@ -33,9 +33,11 @@ def menu_4_options():
         print("----------------------------------------------------------")
         choice = int(input("Elija la opción correspondiente: "))
         if choice == 1:#iniciar sesion
+            print("----------------------------------------------------------")
             print("Iniciar sesion")
             correo = input("Correo: ")
             password = input("Password: ")
+            print("----------------------------------------------------------")
             largo = 5 + 1 +len(correo) + 1 + len(password)
             texto = larstr(largo) + "adusr" + "1" + correo + " " + password
             s.send(texto.encode("utf-8"))
@@ -113,7 +115,7 @@ def menu_sesionini(user):
         print("----------------------------------------------------------")
         return menu_sesionini(user)
     elif choice == 2:
-        pass
+        menu_ramos(user)
     elif choice == 3:
         pass
     elif choice == 4:
@@ -123,21 +125,48 @@ def menu_sesionini(user):
         return menu_4_options()
 
 def menu_ramos(user):
+    print("----------------------------------------------------------")
     print("""
     1. Ver ramos
     2. Agregar ramo
     3. Eliminar ramo
     4. Volver
     """)
+    print("----------------------------------------------------------")
     choice = int(input("Elija la opción correspondiente: "))
     if choice == 1:
         pass
     elif choice == 2:
-        pass
+        print("----------------------------------------------------------")
+        print("INGRESE LOS DATOS DEL RAMO")
+        print("Nombre: ")
+        nombre = str(input())
+        print("Descripción: ")
+        descripcion = str(input())
+        print("Profesor: ")
+        profesor = str(input())
+        print("----------------------------------------------------------")
+        usuario = user
+        largo = 5 + 1 + len(usuario) + 3 + len(nombre) + 3 + len(descripcion) + 3 + len(profesor)
+        texto = larstr(largo) + "adram" + "2" + usuario + "---" + nombre + "---" + descripcion + "---" + profesor
+        s.send(texto.encode("utf-8"))
+        resp = s.recv(4096)
+        respuesta = resp.decode("utf-8")
+        print(respuesta)
+        respuesta = respuesta[12:]
+        if respuesta == "a":
+            print("Ramo agregado")
+            return menu_ramos(user)
+        elif respuesta == "e":
+            print("Error al agregar ramo")
+            return menu_ramos(user)
+        else:
+            print("Error")
+            return menu_ramos(user)
     elif choice == 3:
         pass
     elif choice == 4:
-        menu_4_options()
+        menu_sesionini(user)
 
 
 menu_4_options()    
