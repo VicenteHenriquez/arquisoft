@@ -118,7 +118,7 @@ while True:
             idramo = cursor.fetchone()
             idramo = int(idramo[0])
             try: #insertamos el curso
-                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES ("+ idusuario + ", "+ idramo + ", '" + descurso + "', '" + profesor + "')"
+                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES ("+ str(idusuario) + ", "+ str(idramo) + ", '" + descurso + "', '" + profesor + "')"
                 print(sentencia5)
                 cursor.execute(sentencia5)
                 conn.commit()
