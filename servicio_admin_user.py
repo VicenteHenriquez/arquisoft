@@ -43,7 +43,7 @@ while True:
         datarec = s.recv(4096)
         datarec = datarec.decode("utf-8")
         print(datarec)
-        resp = datarec[10:]
+        resp = datarec[12:]
         resp = "00006"+ "adusr" + resp
         s.send(resp.encode("utf-8"))
 
