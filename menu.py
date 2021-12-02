@@ -142,6 +142,8 @@ def menu_ramos(user):
         resp = s.recv(4096)
         respuesta = resp.decode("utf-8")
         respuesta = respuesta[12:]
+        for i in respuesta:
+            print(i)
         print(respuesta)
         print("----------------------------------------------------------")
 
