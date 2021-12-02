@@ -1,5 +1,6 @@
 import socket
 import sqlite3 as sql
+from sqlite3.dbapi2 import Error
 import sys
 import time
 
@@ -123,8 +124,8 @@ while True:
                 cursor.execute(sentencia5)
                 conn.commit()
                 s.send(b'00006conbda')
-            except: #error
-                print("error")
+            except Error: #error
+                print("Error:", Error)
                 conn.rollback()
                 s.send(b'00006conbde')
         
