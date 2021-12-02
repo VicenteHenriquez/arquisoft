@@ -90,7 +90,7 @@ while True:
         if ramo == None: #no existe el ramo
             try:
                 sentencia3 = "INSERT INTO ramos (nombre) VALUES ('" + nombreram + "')"
-                cursor.execute(sentencia4)
+                cursor.execute(sentencia3)
                 conn.commit()
             except:
                 conn.rollback()
