@@ -24,11 +24,13 @@ def larstr(largo):
 
 def menu_4_options():
     while True:
+        print("----------------------------------------------------------")
         print("""
         1. Iniciar sesion
         2. Registrar
         3. Salir
         """)
+        print("----------------------------------------------------------")
         choice = int(input("Elija la opción correspondiente: "))
         if choice == 1:#iniciar sesion
             print("Iniciar sesion")
@@ -82,6 +84,7 @@ def menu_4_options():
             print("Opción incorrecta")
 
 def menu_sesionini(user):
+    print("----------------------------------------------------------")
     print("""
     Bienvenido
     1. Ver perfil
@@ -90,6 +93,7 @@ def menu_sesionini(user):
     4. Notas
     5. Salir
     """)
+    print("----------------------------------------------------------")
     choice = int(input("Elija la opción correspondiente: "))
     if choice == 1:
         usuario = user
@@ -115,8 +119,8 @@ def menu_sesionini(user):
     elif choice == 4:
         pass
     elif choice == 5:
-        print("Saliendo...Muchas gracias por utilizar nuestros servicios")
-        sys.exit()
+        print("Cerrando sesion...")
+        return menu_4_options()
 
 def menu_ramos(user):
     print("""
