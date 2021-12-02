@@ -30,8 +30,7 @@ def menu_4_options():
         3. Salir
         """)
         choice = int(input("Elija la opción correspondiente: "))
-        if choice == 1:
-            #iniciar sesion
+        if choice == 1:#iniciar sesion
             print("Iniciar sesion")
             correo = input("Correo: ")
             password = input("Password: ")
@@ -79,6 +78,8 @@ def menu_4_options():
         elif choice == 3:
             print("Saliendo...Muchas gracias por utilizar nuestros servicios")
             sys.exit()
+        else:
+            print("Opción incorrecta")
 
 def menu_sesionini(user):
     print("""
@@ -91,7 +92,19 @@ def menu_sesionini(user):
     """)
     choice = int(input("Elija la opción correspondiente: "))
     if choice == 1:
-        pass
+        usuario = user
+        largo = 5 + 1 + len(usuario)
+        texto = larstr(largo) + "adusr" + "3" + usuario
+        s.send(texto.encode("utf-8"))
+        resp = s.recv(4096)
+        print(resp.decode("utf-8"))
+        respuesta = resp.decode("utf-8")
+        respuesta = respuesta[12:]
+        respuesta = respuesta.split("---")
+        print("Nombre: " + respuesta[0])
+        print("Correo: " + respuesta[1])
+        print("Establecimiento: " + respuesta[2])
+        print("Clave: " + respuesta[3])
     elif choice == 2:
         pass
     elif choice == 3:

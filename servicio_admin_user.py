@@ -66,5 +66,17 @@ while True:
         resp = datarec[12:] #00008conbdOK + r o e
         resp = "00006"+ "adusr" + resp #formulamos respuesta para menu.py
         s.send(resp.encode("utf-8")) #enviamos respuesta menu.py
-    else:
-        pass
+    
+    elif data1 == "3": #ver usuario
+        usuario = data[6:]
+        sql = "SELECT * FROM usuario WHERE correo = '"+ usuario +"'"
+        largosen = 5+ 1 +len(sql)
+        largosen = larstr(largosen)
+        sendbd = largosen + "conbd" + "3" + sql
+        s.send(sendbd.encode("utf-8")) #enviamos a servicio_conbd.py
+        datarec = s.recv(4096) #recibimos respuesta
+        datarec = datarec.decode("utf-8")
+        print(datarec)
+        largo = 5 + len(datarec)
+        enviar = larstr(largo) + "adusr" + datarec
+        s.send(enviar.encode("utf-8")) #enviamos respuesta menu.py

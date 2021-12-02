@@ -59,4 +59,16 @@ while True:
         except:
             conn.rollback()
             s.send(b'00006conbde')
-        pass
+    elif data[5:6] == "3": #consulta de usuario
+        sentencia = data[6:] #excluimos la sentencia
+        print(sentencia)
+        cursor.execute(sentencia) #ejecutamos la sentencia
+        resultado = cursor.fetchone() #obtenemos el resultado
+        nombre = resultado[1]
+        correo = resultado[2]
+        establecimiento = resultado[3]
+        clave = resultado[4]
+        largo = 5 + len(nombre) + 3 + len(correo) + 3 + len(establecimiento) + 3 +len(clave)
+        enviar = larstr(largo) + "conbd" + nombre + "---" + correo + "---" + establecimiento + "---" + clave
+        print(enviar)
+        s.send(enviar.encode("utf-8"))
