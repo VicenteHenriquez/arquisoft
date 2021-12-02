@@ -145,7 +145,7 @@ def menu_ramos(user):
         respuesta = respuesta.split("), (")
         largresp = len(respuesta)
         for i in range(len(respuesta)):
-            if i == largresp:
+            if i == largresp-1:
                 print(respuesta[i].strip(")]"))
             else:
                 print(respuesta[i])
