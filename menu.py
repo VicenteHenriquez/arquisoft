@@ -66,7 +66,7 @@ def menu_4_options():
                 s.send(texto.encode("utf-8"))
                 resp = s.recv(4096)
                 print(resp.decode("utf-8"))
-                respuesta = resp[12]
+                respuesta = resp.decode[12]
                 print(respuesta)
                 if respuesta == "r":
                     print("Registro exitoso")
