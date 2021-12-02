@@ -41,7 +41,7 @@ def menu_4_options():
             resp = s.recv(4096)
             print(resp.decode("utf-8"))
             respuesta = resp.decode("utf-8")
-            respuesta = respuesta[10:]
+            respuesta = respuesta[12:]
             if respuesta == "v":
                 user = correo
                 menu_sesionini(user)
@@ -50,21 +50,31 @@ def menu_4_options():
             else:
                 print("Error")
         elif choice == 2: #registrar
-            print("Ingrese su nombre: ")
+            print("Ingrese su nombre y apellido: ")
             nombre = str(input())
             print("Ingrese su correo: ")
             correo = str(input())
-            print("Ingrese su password: ")
+            print("Ingrese su establecimiento: ")
+            establecimiento = str(input())
+            print("Ingrese su password(sin espacios): ")
             password1 = str(input())
             print("Ingrese su password nuevamente: ")
             password2 = str(input())
             if password1 == password2:
-                largo = 5 + 1 + len(nombre) + 1 + len(correo) + 1 + len(password1)
-                texto = larstr(largo) + "adusr" + "2" + nombre + " " + correo + " " + password1
+                largo = 5 + 1 + len(nombre) + 1 + len(correo) + 1 + len(establecimiento) + 1 + len(password1)
+                texto = larstr(largo) + "adusr" + "2" + nombre + "," + correo + "," + establecimiento + "," + password1
                 s.send(texto.encode("utf-8"))
                 resp = s.recv(4096)
                 print(resp.decode("utf-8"))
-            pass
+                respuesta = resp[12:]
+                if respuesta == "r":
+                    print("Registro exitoso")
+                elif respuesta == "e":
+                    print("Correo ya registrado o error al registrar")
+                else:
+                    print("Error")
+            else:
+                print("Las contraseñas no coinciden")
         elif choice == 3:
             print("Saliendo...Muchas gracias por utilizar nuestros servicios")
             sys.exit()

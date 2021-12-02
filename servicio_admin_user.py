@@ -38,16 +38,32 @@ while True:
         sql = "SELECT id FROM usuario WHERE correo = '"+ usuario +"' AND clave = '" + password + "'"
         largosen = 5+ 1 +len(sql)
         largosen = larstr(largosen)
-        sendbd = largosen + "conbd" + "1" + sql
-        s.send(sendbd.encode("utf-8"))
-        datarec = s.recv(4096)
+        sendbd = largosen + "conbd" + "1" + sql 
+        s.send(sendbd.encode("utf-8")) #enviamos a servicio_conbd.py
+        datarec = s.recv(4096) #recibimos respuesta
         datarec = datarec.decode("utf-8")
         print(datarec)
-        resp = datarec[12:]
-        resp = "00006"+ "adusr" + resp
-        s.send(resp.encode("utf-8"))
+        resp = datarec[12:] #00008conbdOK + v o f
+        resp = "00006"+ "adusr" + resp #formulamos respuesta para menu.py
+        s.send(resp.encode("utf-8")) #enviamos respuesta menu.py
 
     elif data1 == "2": #registro de usuario
-        pass
+        espacios = data.split(',')
+        nombre = espacios[0]
+        correo = espacios[1]
+        establecimiento = espacios[2]
+        clave = espacios[3]
+        sql1 = "SELECT id FROM usuario WHERE correo = '"+ correo +"'"
+        sql = "INSERT INTO usuario (nombre, correo, establecimiento, clave) VALUES ('"+ nombre +"', '"+ correo +"', '"+ establecimiento +"', '"+ clave +"')" 
+        largosen = 5+ 1 +len(sql) + 3 + len(sql1)
+        largosen = larstr(largosen)
+        sendbd = largosen + "conbd" + "2" + sql + "---" + sql1
+        s.send(sendbd.encode("utf-8")) #enviamos a servicio_conbd.py
+        datarec = s.recv(4096) #recibimos respuesta
+        datarec = datarec.decode("utf-8")
+        print(datarec)
+        resp = datarec[12:] #00008conbdOK + r o e
+        resp = "00006"+ "adusr" + resp #formulamos respuesta para menu.py
+        s.send(resp.encode("utf-8")) #enviamos respuesta menu.py
     else:
         pass
