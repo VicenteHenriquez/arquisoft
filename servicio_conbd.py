@@ -84,22 +84,24 @@ while True:
         sentencia = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         cursor.execute(sentencia)
         idusuario = cursor.fetchone()
-        idusuario = idusuario[0]
+        idusuario = int(idusuario[0])
         sentencia2 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
         cursor.execute(sentencia2)
         ramo = cursor.fetchone()
         if ramo == None: #no existe el ramo
             try:
                 sentencia3 = "INSERT INTO ramos (nombre) VALUES ('" + nombreram + "')"
+                print(sentencia3)
                 cursor.execute(sentencia3)
                 conn.commit()
             except:
                 conn.rollback()
                 s.send(b'00006conbde')
             sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'"
+            print(sentencia4)
             cursor.execute(sentencia4)
             idramo = cursor.fetchone()
-            idramo = idramo[0]
+            idramo = int(idramo[0])
             try: #insertamos el curso
                 sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES ("+ idusuario + ", "+ idramo + ", '" + descurso + "', '" + profesor + "')"
                 print(sentencia5)
@@ -112,9 +114,10 @@ while True:
         else: #existe el ramo
             sentencia4 = "SELECT id FROM ramos WHERE nombre = '" + nombreram + "'" #obtenemos el id del ramo
             cursor.execute(sentencia4)
-            idramo = cursor.fetchone()[0] #obtenemos el id del ramo
+            idramo = cursor.fetchone() #obtenemos el id del ramo
+            idramo = int(idramo[0])
             try: #insertamos el curso
-                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + int(idusuario) + ", " + int(idramo) + ", '" + descurso + "', '" + profesor + "')"
+                sentencia5 = "INSERT INTO cursos (idusuario, idramo, descripcion, profesor) VALUES (" + idusuario + ", " + idramo + ", '" + descurso + "', '" + profesor + "')"
                 cursor.execute(sentencia5)
                 conn.commit()
                 s.send(b'00006conbda')
