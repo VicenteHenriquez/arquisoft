@@ -1,7 +1,6 @@
 import socket
 import sys
 import time
-from typing import TextIO
 
 def larstr(largo):
     ceros = 5-len(str(largo))
@@ -73,3 +72,5 @@ while True:
         largo = larstr(largo) + "adram" + data
         print(largo)
         s.send(largo.encode("utf-8"))
+    else:
+        pass

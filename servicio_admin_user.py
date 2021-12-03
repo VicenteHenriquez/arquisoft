@@ -80,3 +80,6 @@ while True:
         largo = 5 + len(datarec)
         enviar = larstr(largo) + "adusr" + datarec
         s.send(enviar.encode("utf-8")) #enviamos respuesta menu.py
+    
+    else:
+        pass

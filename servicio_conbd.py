@@ -171,3 +171,18 @@ while True:
     
     elif data[5:6] == "7": #eliminar curso
         pass
+
+    elif data[5:6] == "8": #visualizacion de evaluaciones
+        pass
+    elif data[5:6] == "9": #ingresar evaluacion
+        data = data[6:].split("---")
+        sentencia1 = data[0]
+        cursor.execute(sentencia1)
+        idusuario = cursor.fetchone()
+        idusuario = idusuario[0]
+        sentencia2 = data[1]
+        cursor.execute(sentencia2)
+        idramo = cursor.fetchone()
+        if idramo == None:
+            s.send(b'00006conbderr')
+        pass

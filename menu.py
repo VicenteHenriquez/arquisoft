@@ -96,8 +96,8 @@ def menu_sesionini(user):
     5. Salir
     """)
     print("----------------------------------------------------------")
-    choice = int(input("Elija la opción correspondiente: "))
-    if choice == 1:
+    choice = input("Elija la opción correspondiente: ")
+    if choice == "1":
         usuario = user
         largo = 5 + 1 + len(usuario)
         texto = larstr(largo) + "adusr" + "3" + usuario
@@ -114,13 +114,13 @@ def menu_sesionini(user):
         print("Clave: " + respuesta[3])
         print("----------------------------------------------------------")
         return menu_sesionini(user)
-    elif choice == 2:
+    elif choice == "2":
         menu_ramos(user)
-    elif choice == 3:
+    elif choice == "3":
         pass
-    elif choice == 4:
+    elif choice == "4":
         pass
-    elif choice == 5:
+    elif choice == "5":
         print("Cerrando sesion...")
         return menu_4_options()
     else:
@@ -136,8 +136,8 @@ def menu_ramos(user):
     4. Volver
     """)
     print("----------------------------------------------------------")
-    choice = int(input("Elija la opción correspondiente: "))
-    if choice == 1: #ver ramos
+    choice = input("Elija la opción correspondiente: ")
+    if choice == "1": #ver ramos
         usuario = user
         largo = 5 + 1 + len(usuario)
         texto = larstr(largo) + "adram" + "1" + usuario
@@ -175,7 +175,7 @@ def menu_ramos(user):
             print("----------------------------------------------------------")
             return menu_ramos(user)
 
-    elif choice == 2: #agregar ramo
+    elif choice == "2": #agregar ramo
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DEL RAMO")
         print("Nombre: ")
@@ -205,13 +205,58 @@ def menu_ramos(user):
         else:
             print("Error")
             return menu_ramos(user)
-    elif choice == 3: #eliminar ramo
+    
+    elif choice == "3": #eliminar ramo
         pass
-    elif choice == 4: #volver
+    
+    elif choice == "4": #volver
         menu_sesionini(user)
+    
     else:
         pass
     return menu_ramos(user)
 
+def menu_evaluaciones(user):
+    print("----------------------------------------------------------")
+    print("""
+    1. Ver evaluaciones
+    2. Agregar evaluación
+    3. Eliminar evaluación
+    4. Volver
+    """)
+    print("----------------------------------------------------------")
+    choice = input("Elija la opción correspondiente: ")
+    if choice == "1":
+        pass
+    elif choice == "2":
+        print("----------------------------------------------------------")
+        print("INGRESE LOS DATOS DE LA  NUEVA EVALUACIÓN: ")
+        ramo = str(input("Ramo: "))
+        nombre = str(input("Nombre: "))
+        fecha = str(input("Fecha(dd/mm/aaaa): "))
+        ponderacion = str(input("Ponderación(ej. 1 = 100%, 0.2 = 20%): "))
+        descripcion = str(input("Descripción: "))
+        nota = str(input("Nota(si no tiene, dejar en blanco): "))
+        print("----------------------------------------------------------")
+        usuario = user
+        largo = 5 + 1 + len(usuario) + 3 + len(nombre) + 3 + len(fecha) + 3 + len(ponderacion) + 3 + len(descripcion) + 3 + len(nota) + 3 + len(ramo)
+        texto = larstr(largo) + "adeva" + "---" + nombre + "---" + fecha + "---" + ponderacion + "---" + descripcion + "---" + nota + "---" + ramo
+        s.send(texto.encode("utf-8"))
+        resp = s.recv(4096)
+        respuesta = resp.decode("utf-8")
+        print(respuesta)
+        if respuesta == "err":
+            print("Ramo no encontrado")
+            return menu_evaluaciones(user)
+        else:
+            pass
+        
+    elif choice == "3":
+        pass
+    elif choice == "4":
+        menu_sesionini(user)
+    else:
+        print("Opción incorrecta")
+        return menu_evaluaciones(user)
 
 menu_4_options()    
