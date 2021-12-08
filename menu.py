@@ -117,7 +117,7 @@ def menu_sesionini(user):
     elif choice == "2":
         menu_ramos(user)
     elif choice == "3":
-        pass
+        menu_evaluaciones(user)
     elif choice == "4":
         pass
     elif choice == "5":
