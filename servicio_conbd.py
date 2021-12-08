@@ -194,8 +194,8 @@ while True:
                 s.send(b'00006conbderr')
             else:
                 idcurso = idcurso[0]
-                largo = 5 + len(idusuario) + 3 + len(idcurso)
-                enviar = larstr(largo) + "conbd" + idusuario + "---" + idcurso
+                largo = 5 + len(str(idusuario)) + 3 + len(str(idcurso))
+                enviar = larstr(largo) + "conbd" + str(idusuario) + "---" + str(idcurso)
                 s.send(enviar.encode("utf-8"))
     
     elif data[5:6] == "a": #insertar evaluacion
