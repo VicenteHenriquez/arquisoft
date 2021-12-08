@@ -41,7 +41,7 @@ while True:
         notaev = data[5]
         ramo = data[6]
         sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
-        sql1 = "SELECT id FROM cursos WHERE nombre = '" + ramo + "'"
+        sql1 = "SELECT id FROM ramos WHERE nombre = '" + ramo + "'"
         largo = 5 + 1 + len(sql) + 3 + len(sql1)
         texto = larstr(largo) + "conbd" + "9" + sql + "---" + sql1
         s.send(texto.encode("utf-8"))
@@ -54,8 +54,8 @@ while True:
         else:
             datos = datos.split("---")
             idusuario = datos[0]
-            idramo = datos[1]
-            sentencia = "INSERT INTO evaluaciones (nombre, fecha, ponderacion, descripcion, nota, idramo, idusuario) VALUES ('" + nombrev + "', '" + fechaev + "', '" + pondev + "', '" + descev + "', '" + notaev + "', '" + idramo + "', '" + idusuario + "')"
+            idcurso = datos[1]
+            sentencia = "INSERT INTO evaluaciones (nombre, fecha, ponderacion, descripcion, nota, idramo, idusuario) VALUES ('" + nombrev + "', '" + fechaev + "', '" + pondev + "', '" + descev + "', '" + notaev + "', '" + idcurso + "', '" + idusuario + "')"
             largo = 5 + 2 + len(sentencia)
             texto = larstr(largo) + "conbd" + "a" + sentencia
             s.send(texto.encode("utf-8"))

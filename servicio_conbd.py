@@ -187,9 +187,16 @@ while True:
         if idramo == None:
             s.send(b'00006conbderr')
         else:
-            largo = 5 + len(idusuario) + 3 + len(idramo)
-            enviar = larstr(largo) + "conbd" + idusuario + "---" + idramo
-            s.send(enviar.encode("utf-8"))
+            sentencia = "SELECT id FROM cursos WHERE idusuario = " + str(idusuario) + " AND idramo = " + str(idramo[0]) + ""
+            cursor.execute(sentencia)
+            idcurso = cursor.fetchone()
+            if idcurso == None:
+                s.send(b'00006conbderr')
+            else:
+                idcurso = idcurso[0]
+                largo = 5 + len(idusuario) + 3 + len(idcurso)
+                enviar = larstr(largo) + "conbd" + idusuario + "---" + idcurso
+                s.send(enviar.encode("utf-8"))
     
     elif data[5:6] == "a": #insertar evaluacion
         data = data[6:] #excluimos la sentencia
