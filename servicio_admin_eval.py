@@ -40,7 +40,7 @@ while True:
         descev = data[4]
         notaev = data[5]
         ramo = data[6]
-        sql = "SELECT id FROM usuario WHERE usuario = '" + usuario + "'"
+        sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         sql1 = "SELECT id FROM cursos WHERE nombre = '" + ramo + "'"
         largo = 5 + 1 + len(sql) + 3 + len(sql1)
         texto = larstr(largo) + "conbd" + "9" + sql + "---" + sql1
