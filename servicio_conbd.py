@@ -174,7 +174,8 @@ while True:
 
     elif data[5:6] == "8": #visualizacion de evaluaciones
         pass
-    elif data[5:6] == "9": #ingresar evaluacion
+   
+    elif data[5:6] == "9": #consulta id curso e id usuario
         data = data[6:].split("---")
         sentencia1 = data[0]
         cursor.execute(sentencia1)
@@ -185,4 +186,19 @@ while True:
         idramo = cursor.fetchone()
         if idramo == None:
             s.send(b'00006conbderr')
-        pass
+        else:
+            largo = 5 + len(idusuario) + 3 + len(idramo)
+            enviar = larstr(largo) + "conbd" + idusuario + "---" + idramo
+            s.send(enviar.encode("utf-8"))
+    
+    elif data[5:6] == "a": #insertar evaluacion
+        data = data[6:] #excluimos la sentencia
+        print(data)
+        try:
+            cursor.execute(data)
+            conn.commit()
+            s.send(b'00006conbda')
+        except:
+            conn.rollback()
+            s.send(b'00006conbde')
+

@@ -231,12 +231,12 @@ def menu_evaluaciones(user):
     elif choice == "2":
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DE LA  NUEVA EVALUACIÓN: ")
-        ramo = str(input("Ramo: "))
+        ramo = str(input("Curso: "))
         nombre = str(input("Nombre: "))
         fecha = str(input("Fecha(dd/mm/aaaa): "))
         ponderacion = str(input("Ponderación(ej. 1 = 100%, 0.2 = 20%): "))
         descripcion = str(input("Descripción: "))
-        nota = str(input("Nota(si no tiene, dejar en blanco): "))
+        nota = str(input("Nota(00 a 70, si no tiene, dejar en blanco): "))
         print("----------------------------------------------------------")
         usuario = user
         largo = 5 + 1 + len(usuario) + 3 + len(nombre) + 3 + len(fecha) + 3 + len(ponderacion) + 3 + len(descripcion) + 3 + len(nota) + 3 + len(ramo)
@@ -245,12 +245,16 @@ def menu_evaluaciones(user):
         resp = s.recv(4096)
         respuesta = resp.decode("utf-8")
         print(respuesta)
-        if respuesta == "err":
-            print("Ramo no encontrado")
+        if respuesta[12:] == "err":
+            print("Curso no encontrado")
+            return menu_evaluaciones(user)
+        elif respuesta[12:] == "a":
+            print("Evaluación agregada")
             return menu_evaluaciones(user)
         else:
-            pass
-        
+            print("Error al agregar evaluación")
+            return menu_evaluaciones(user)
+    
     elif choice == "3":
         pass
     elif choice == "4":
