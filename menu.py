@@ -154,7 +154,7 @@ def menu_ramos(user):
             else:
                 print(respuesta[i])
         print("----------------------------------------------------------")
-        print("Escriba el numero del ramo que desea ver: ")
+        print("Escriba el numero del ramo que desea ver(0 si desea salir): ")
         idramo = input()
         if idramo.isnumeric() == False:
             print("Ramo no encontrado")
@@ -166,14 +166,17 @@ def menu_ramos(user):
             resp = s.recv(4096)
             respuesta = resp.decode("utf-8")
             respuesta = respuesta[12:]
-            respuesta = respuesta.split("---")
-            print(respuesta)
-            print("----------------------------------------------------------")
-            print("Nombre: " + respuesta[0])
-            print("Descripción: " + respuesta[1])
-            print("Profesor: " + respuesta[2])
-            print("----------------------------------------------------------")
-            return menu_ramos(user)
+            if respuesta == "e":
+                print("Curso no encontrado")
+            else:
+                respuesta = respuesta.split("---")
+                print(respuesta)
+                print("----------------------------------------------------------")
+                print("Nombre: " + respuesta[0])
+                print("Descripción: " + respuesta[1])
+                print("Profesor: " + respuesta[2])
+                print("----------------------------------------------------------")
+                return menu_ramos(user)
 
     elif choice == "2": #agregar ramo
         print("----------------------------------------------------------")
