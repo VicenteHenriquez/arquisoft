@@ -240,7 +240,7 @@ def menu_evaluaciones(user):
         print("----------------------------------------------------------")
         usuario = user
         largo = 5 + 1 + len(usuario) + 3 + len(nombre) + 3 + len(fecha) + 3 + len(ponderacion) + 3 + len(descripcion) + 3 + len(nota) + 3 + len(ramo)
-        texto = larstr(largo) + "adeva" + "---" + nombre + "---" + fecha + "---" + ponderacion + "---" + descripcion + "---" + nota + "---" + ramo
+        texto = larstr(largo) + "adeva" + "2" + nombre + "---" + fecha + "---" + ponderacion + "---" + descripcion + "---" + nota + "---" + ramo
         s.send(texto.encode("utf-8"))
         resp = s.recv(4096)
         respuesta = resp.decode("utf-8")
