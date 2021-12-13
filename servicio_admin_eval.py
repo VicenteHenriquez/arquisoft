@@ -29,7 +29,29 @@ while True:
     data = data.decode("utf-8")[5:]
     data1 = data[5:6]
     if data1 == "1": #consulta evaluaciones
-        pass
+        data2 = data[6:]
+        data2 = data2.split("---")
+        usuario = data2[0]
+        idcurso = data2[1]
+        sql1 = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
+        largo = 5 + 1 + len(sql1) + 3 + len(str(idcurso))
+        texto = larstr(largo) + "conbd" + "8" + sql1 + "---" + str(idcurso)
+        s.send(texto.encode("utf-8"))
+        data = s.recv(4096)
+        print(data.decode("utf-8"))
+        data = data.decode("utf-8")[5:]
+        data = data[12:]
+        if data == "err":
+            s.send(b'00008adevaerr')
+        else:
+            data.split("---")
+            nombreramo = data[0]
+            evaluaciones = data[1]
+            evaluaciones = evaluaciones[14:]
+            largo = 5 + len(nombreramo) + "---" + len(evaluaciones)
+            texto = larstr(largo) + "adeva" + nombreramo + "---" + evaluaciones
+            s.send(texto.encode("utf-8"))
+
     elif data1 == "2": #ingresa evaluacion
         data = data[6:]
         data = data.split("---")

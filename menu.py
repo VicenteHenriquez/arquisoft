@@ -92,8 +92,7 @@ def menu_sesionini(user):
     1. Ver perfil
     2. Ramos
     3. Evaluaciones
-    4. Notas
-    5. Salir
+    4. Salir
     """)
     print("----------------------------------------------------------")
     choice = input("Elija la opción correspondiente: ")
@@ -119,8 +118,6 @@ def menu_sesionini(user):
     elif choice == "3":
         menu_evaluaciones(user)
     elif choice == "4":
-        pass
-    elif choice == "5":
         print("Cerrando sesion...")
         return menu_4_options()
     else:
@@ -230,16 +227,50 @@ def menu_evaluaciones(user):
     print("----------------------------------------------------------")
     choice = input("Elija la opción correspondiente: ")
     if choice == "1":
-        pass
+        ver_cursos(user)
+        print("Ingrese el id del curso que desea ver evaluaciones(0 si desea volver): ")
+        idcurso = input()
+        if idcurso.isnumeric() == False:
+            print("Error")
+            return menu_evaluaciones(user)
+        else:
+            if idcurso == "0":
+                return menu_evaluaciones(user)
+            else:
+                largo = 5 + 1 + len(user) + 3 + len(idcurso)
+                texto = larstr(largo) + "adeva" + "1" + user + "---" + idcurso
+                s.send(texto.encode("utf-8"))
+                resp = s.recv(4096)
+                respuesta = resp.decode("utf-8")
+                respuesta = respuesta[12:]
+                if respuesta == "err":
+                    print("Error")
+                    return menu_evaluaciones(user)
+                else:
+                    respuesta = respuesta.split("---")
+                    nombrecurso = respuesta[0]
+                    evaluaciones = respuesta[1]
+                    evaluaciones = evaluaciones.split("), (")
+                    largoev = len(evaluaciones)
+                    print("----------------------------------------------------------")
+                    print("Evaluaciones del curso " + nombrecurso)
+                    for i in range(len(evaluaciones)):
+                        if i == largoev-1:
+                            print(evaluaciones[i].strip(")]"))
+                        else:
+                            print(evaluaciones[i])
+                    print("----------------------------------------------------------")
+                    return menu_evaluaciones(user)
+
     elif choice == "2":
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DE LA  NUEVA EVALUACIÓN: ")
         ramo = str(input("Curso: "))
         nombre = str(input("Nombre: "))
         fecha = str(input("Fecha(dd/mm/aaaa): "))
-        ponderacion = str(input("Ponderación(ej. 1 = 100%, 0.2 = 20%): "))
+        ponderacion = str(input("Ponderación(0-100): "))
         descripcion = str(input("Descripción: "))
-        nota = str(input("Nota(00 a 70, si no tiene, dejar en blanco): "))
+        nota = str(input("Nota(00 a 70, si no tiene, colocar 00): "))
         print("----------------------------------------------------------")
         usuario = user
         largo = 5 + 1 + len(usuario) + 3 + len(nombre) + 3 + len(fecha) + 3 + len(ponderacion) + 3 + len(descripcion) + 3 + len(nota) + 3 + len(ramo)
@@ -265,5 +296,23 @@ def menu_evaluaciones(user):
     else:
         print("Opción incorrecta")
         return menu_evaluaciones(user)
+
+def ver_cursos(user):
+    largo = 5 + 1 + len(user)
+    texto = larstr(largo) + "adram" + "1" + user
+    s.send(texto.encode("utf-8"))
+    resp = s.recv(4096)
+    respuesta = resp.decode("utf-8")
+    respuesta = respuesta[12:]
+    respuesta = respuesta.split("), (")
+    largresp = len(respuesta)
+    print("----------------------------------------------------------")
+    for i in range(len(respuesta)):
+        if i == largresp-1:
+            print(respuesta[i].strip(")]"))
+        else:
+            print(respuesta[i])
+    print("----------------------------------------------------------")
+
 
 menu_4_options()    

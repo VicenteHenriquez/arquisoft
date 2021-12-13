@@ -173,7 +173,23 @@ while True:
         pass
 
     elif data[5:6] == "8": #visualizacion de evaluaciones
-        pass
+        data = data[6:].split("---")
+        sentencia = data[0]
+        idcurso = data[1]
+        cursor.execute(sentencia)
+        idusuario = cursor.fetchone()[0]
+        sentencia1 = "SELECT id, nombre, fecha, ponderacion, descripcion, nota FROM evaluaciones idramo = '"+ str(idcurso) +"' AND idusuario = '"+ str(idusuario) +"'"
+        cursor.execute(sentencia1)
+        resultado = cursor.fetchall()
+        if resultado == None:
+            s.send(b'00006conbderr')
+        else:
+            sentencia2 = "select ramos.nombre from cursos, ramos where cursos.idramo = ramos.id and cursos.id = '"+ str(idcurso) +"'"
+            cursor.execute(sentencia2)
+            nombreramo = cursor.fetchone()[0]
+            largo = 5 + len(nombreramo) + 3 + len(resultado)
+            enviar = larstr(largo) + "conbd" + nombreramo + "---" + str(resultado)
+            s.send(enviar.encode("utf-8"))
    
     elif data[5:6] == "9": #consulta id curso e id usuario
         data = data[6:].split("---")
