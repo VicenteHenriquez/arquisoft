@@ -47,7 +47,7 @@ while True:
             data = data.split("---")
             nombreramo = data[0]
             evaluaciones = data[1]
-            evaluaciones = evaluaciones[14:]
+            evaluaciones = evaluaciones[2:]
             largo = 5 + len(str(nombreramo)) + 3 + len(str(evaluaciones))
             texto = larstr(largo) + "adeva" + nombreramo + "---" + evaluaciones
             print(texto)
