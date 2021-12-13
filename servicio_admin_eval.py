@@ -50,6 +50,7 @@ while True:
             evaluaciones = evaluaciones[14:]
             largo = 5 + len(str(nombreramo)) + 3 + len(str(evaluaciones))
             texto = larstr(largo) + "adeva" + nombreramo + "---" + evaluaciones
+            print(texto)
             s.send(texto.encode("utf-8"))
 
     elif data1 == "2": #ingresa evaluacion
