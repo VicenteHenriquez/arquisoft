@@ -48,7 +48,7 @@ while True:
             nombreramo = data[0]
             evaluaciones = data[1]
             evaluaciones = evaluaciones[14:]
-            largo = 5 + len(str(nombreramo)) + "---" + len(str(evaluaciones))
+            largo = 5 + len(str(nombreramo)) + 3 + len(str(evaluaciones))
             texto = larstr(largo) + "adeva" + nombreramo + "---" + evaluaciones
             s.send(texto.encode("utf-8"))
 
