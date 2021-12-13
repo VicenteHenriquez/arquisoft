@@ -40,11 +40,11 @@ while True:
         data = s.recv(4096)
         print(data.decode("utf-8"))
         data = data.decode("utf-8")[5:]
-        data = data[12:]
+        data = data[7:]
         if data == "err":
             s.send(b'00008adevaerr')
         else:
-            data.split("---")
+            data = data.split("---")
             nombreramo = data[0]
             evaluaciones = data[1]
             evaluaciones = evaluaciones[14:]
