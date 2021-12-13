@@ -178,7 +178,7 @@ while True:
         idcurso = data[1]
         cursor.execute(sentencia)
         idusuario = cursor.fetchone()[0]
-        sentencia1 = "SELECT id, nombre, fecha, ponderacion, descripcion, nota FROM evaluaciones idramo = '"+ str(idcurso) +"' AND idusuario = '"+ str(idusuario) +"'"
+        sentencia1 = "SELECT id, nombre, fecha, ponderacion, descripcion, nota FROM evaluaciones WHERE idramo = '"+ str(idcurso) +"' AND idusuario = '"+ str(idusuario) +"'"
         cursor.execute(sentencia1)
         resultado = cursor.fetchall()
         if resultado == None:
