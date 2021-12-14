@@ -101,6 +101,7 @@ while True:
         sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         largo = 5 + 1 + len(sql)
         texto = larstr(largo) + "conbd" + "b" + sql
+        print(texto)
         s.send(texto.encode("utf-8"))
         data = s.recv(4096)
         data = data.decode("utf-8")
@@ -109,22 +110,22 @@ while True:
             s.send(b'00008adevaerr')
         else:
             idusuario = datos
-        sql1 = "SELECT id FROM evaluaciones WHERE id = '" + idevaluacion + "' AND idusuario = '" + idusuario + "'"
-        print(sql1)
-        largo = 5 + 1 + len(sql1) + 3 + len(str(nnota))
-        texto = larstr(largo) + "conbd" + "c" + sql1 + "---" + str(nnota)
-        s.send(texto.encode("utf-8"))
-        data = s.recv(4096)
-        data = data.decode("utf-8")
-        datos = data[12:]
-        print(datos)
-        if datos == "ne":
-            s.send(b'00007adevane')
-        elif datos == "a":
-            s.send(b'00006adevaa')
-        elif datos == "e":
-            s.send(b'00006adevae')
-        else:
-            s.send(b'00008adevaerr')
+            sql1 = "SELECT id FROM evaluaciones WHERE id = '" + idevaluacion + "' AND idusuario = '" + idusuario + "'"
+            print(sql1)
+            largo = 5 + 1 + len(sql1) + 3 + len(str(nnota))
+            texto = larstr(largo) + "conbd" + "c" + sql1 + "---" + str(nnota)
+            s.send(texto.encode("utf-8"))
+            data = s.recv(4096)
+            data = data.decode("utf-8")
+            datos = data[12:]
+            print(datos)
+            if datos == "ne":
+                s.send(b'00007adevane')
+            elif datos == "a":
+                s.send(b'00006adevaa')
+            elif datos == "e":
+                s.send(b'00006adevae')
+            else:
+                s.send(b'00008adevaerr')
     else:
         pass
