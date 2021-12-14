@@ -254,12 +254,46 @@ def menu_evaluaciones(user):
                     largoev = len(evaluaciones)
                     print("----------------------------------------------------------")
                     print("Evaluaciones del curso " + nombrecurso)
+                    print("Orden: ID, Nombre, Fecha, Ponderación, Descripción, Nota")
                     for i in range(len(evaluaciones)):
                         if i == largoev-1:
                             print(evaluaciones[i].strip(")]"))
                         else:
+
                             print(evaluaciones[i])
                     print("----------------------------------------------------------")
+                    print("Escriba el numero id de la evaluación que desea editar su nota (0 si desea salir): ")
+                    idevaluacion = input()
+                    if idevaluacion.isnumeric() == False:
+                        print("Error")
+                        return menu_evaluaciones(user)
+                    elif idevaluacion == "0":
+                        return menu_evaluaciones(user)
+                    else:
+                        print("Ingrese la nueva nota(0 - 70): ")
+                        nota = input()
+                        if nota.isnumeric() == False:
+                            print("Error")
+                            return menu_evaluaciones(user)
+                        elif int(nota) >= 0 and int(nota) <= 70:
+                            largo = 5 + 1 + len(user) + 3 + len(str(idevaluacion)) + 3 + len(str(nota))
+                            texto = larstr(largo) + "adeva" + "4" + user + "---" + str(idevaluacion) + "---" + str(nota)
+                            s.send(texto.encode("utf-8"))
+                            resp = s.recv(4096)
+                            respuesta = resp.decode("utf-8")
+                            respuesta = respuesta[12:]
+                            if respuesta == "ne":
+                                print("Evaluación no encontrada")
+                                return menu_evaluaciones(user)
+                            elif respuesta == "a":
+                                print("Nota actualizada")
+                                return menu_evaluaciones(user)
+                            elif respuesta == "e":
+                                print("Error al actualizar nota")
+                                return menu_evaluaciones(user)
+                            else:
+                                print("Error")
+                                return menu_evaluaciones(user)
                     return menu_evaluaciones(user)
 
     elif choice == "2":

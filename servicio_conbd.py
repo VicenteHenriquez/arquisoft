@@ -225,3 +225,34 @@ while True:
             conn.rollback()
             s.send(b'00006conbde')
 
+    elif data[5:6] == "b": #consulta si existe usuario
+        data = data[6:]
+        cursor.execute(data)
+        resultado = cursor.fetchone()
+        if resultado == None:
+            s.send(b'00006conbderr')
+        else:
+            idusuario = resultado[0]
+            largo = 5 + len(str(idusuario))
+            enviar = larstr(largo) + "conbd" + str(idusuario)
+    
+    elif data[5:6] == "c": #consulta si existe evaluacion, update a la nota
+        data = data[6:]
+        data = data.split("---")
+        sentencia = data[0]
+        nota = data[1]
+        cursor.execute(sentencia)
+        resultado = cursor.fetchone()
+        if resultado == None:
+            s.send(b'00007conbdne')
+        else:
+            idevaluacion = resultado[0]
+            sentencia = "UPDATE evaluaciones SET nota = " + str(nota) + " WHERE id = " + str(idevaluacion) + ""
+            try:
+                cursor.execute(sentencia)
+                conn.commit()
+                s.send(b'00006conbda')
+            except:
+                conn.rollback()
+                s.send(b'00006conbde')
+
