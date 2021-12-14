@@ -42,7 +42,7 @@ def menu_4_options():
             texto = larstr(largo) + "adusr" + "1" + correo + " " + password
             s.send(texto.encode("utf-8"))
             resp = s.recv(4096)
-            print(resp.decode("utf-8"))
+            #print(resp.decode("utf-8"))
             respuesta = resp.decode("utf-8")
             respuesta = respuesta[12:]
             if respuesta == "v":
@@ -68,9 +68,9 @@ def menu_4_options():
                 texto = larstr(largo) + "adusr" + "2" + nombre + "," + correo + "," + establecimiento + "," + password1
                 s.send(texto.encode("utf-8"))
                 resp = s.recv(4096)
-                print(resp.decode("utf-8"))
+                #print(resp.decode("utf-8"))
                 respuesta = resp.decode()[12]
-                print(respuesta)
+                #print(respuesta)
                 if respuesta == "r":
                     print("Registro exitoso")
                 elif respuesta == "e":
@@ -83,7 +83,7 @@ def menu_4_options():
             print("Saliendo...Muchas gracias por utilizar nuestros servicios")
             sys.exit()
         else:
-            print("Opción incorrecta")
+            print("Opción incorrecta")   
 
 def menu_sesionini(user):
     print("----------------------------------------------------------")
@@ -102,7 +102,7 @@ def menu_sesionini(user):
         texto = larstr(largo) + "adusr" + "3" + usuario
         s.send(texto.encode("utf-8"))
         resp = s.recv(4096)
-        print(resp.decode("utf-8"))
+        #print(resp.decode("utf-8"))
         respuesta = resp.decode("utf-8")
         respuesta = respuesta[12:]
         respuesta = respuesta.split("---")
@@ -167,6 +167,7 @@ def menu_ramos(user):
             respuesta = respuesta[12:]
             if respuesta == "e":
                 print("Curso no encontrado")
+                return menu_ramos(user)
             else:
                 respuesta = respuesta.split("---")
                 print(respuesta)
@@ -193,7 +194,7 @@ def menu_ramos(user):
         s.send(texto.encode("utf-8"))
         resp = s.recv(4096)
         respuesta = resp.decode("utf-8")
-        print(respuesta)
+        #print(respuesta)
         respuesta = respuesta[12:]
         if respuesta == "a":
             print("Ramo agregado")
@@ -225,7 +226,7 @@ def menu_ramos(user):
             resp = s.recv(4096)
             respuesta2 = resp.decode("utf-8")
             respuesta2 = respuesta2[12:]
-            print(respuesta2)
+            #print(respuesta2)
             if respuesta2 == "err":
                 print("Error")
                 return menu_ramos(user)
@@ -348,7 +349,7 @@ def menu_evaluaciones(user):
         s.send(texto.encode("utf-8"))
         resp = s.recv(4096)
         respuesta = resp.decode("utf-8")
-        print(respuesta)
+        #print(respuesta)
         if respuesta[12:] == "err":
             print("Curso no encontrado")
             return menu_evaluaciones(user)
