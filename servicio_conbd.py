@@ -237,6 +237,7 @@ while True:
             print(idusuario)
             largo = 5 + len(str(idusuario))
             enviar = larstr(largo) + "conbd" + str(idusuario)
+            s.send(enviar.encode("utf-8"))
     
     elif data[5:6] == "c": #consulta si existe evaluacion, update a la nota
         data = data[6:]
