@@ -277,7 +277,7 @@ def menu_evaluaciones(user):
                             return menu_evaluaciones(user)
                         elif int(nota) >= 0 and int(nota) <= 70:
                             largo = 5 + 1 + len(user) + 3 + len(str(idevaluacion)) + 3 + len(str(nota))
-                            texto = larstr(largo) + "adnot" + "4" + user + "---" + str(idevaluacion) + "---" + str(nota)
+                            texto = larstr(largo) + "adnot" + "1" + user + "---" + str(idevaluacion) + "---" + str(nota)
                             s.send(texto.encode("utf-8"))
                             resp = s.recv(4096)
                             respuesta = resp.decode("utf-8")
