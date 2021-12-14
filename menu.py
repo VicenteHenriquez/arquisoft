@@ -407,6 +407,7 @@ def ver_cursos(user): #funcion para ver cursos
         else:
             print(respuesta[i])
     print("----------------------------------------------------------")
+    respuesta = ""
 
 def ver_evaluaciones(user): #funcion para ver evaluaciones
     idcurso = input()
