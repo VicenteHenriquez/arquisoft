@@ -156,6 +156,8 @@ def menu_ramos(user):
         if idramo.isnumeric() == False:
             print("Ramo no encontrado")
             return menu_ramos(user)
+        elif idramo == "0":
+            return menu_ramos(user)
         else:
             largo = 5 + 1 + len(usuario) + 1 + len(idramo)
             texto = larstr(largo) + "adram" + "4" + usuario + "," + idramo
