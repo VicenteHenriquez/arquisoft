@@ -321,6 +321,8 @@ def menu_evaluaciones(user):
                             else:
                                 print("Error")
                                 return menu_evaluaciones(user)
+                        else:
+                            print("Error")
                     return menu_evaluaciones(user)
 
     elif choice == "2": #agregar evaluacion
