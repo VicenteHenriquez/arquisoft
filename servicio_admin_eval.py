@@ -110,12 +110,14 @@ while True:
         else:
             idusuario = datos
         sql1 = "SELECT id FROM evaluaciones WHERE id = '" + idevaluacion + "' AND idusuario = '" + idusuario + "'"
+        print(sql1)
         largo = 5 + 1 + len(sql1) + 3 + len(str(nnota))
         texto = larstr(largo) + "conbd" + "c" + sql1 + "---" + str(nnota)
         s.send(texto.encode("utf-8"))
         data = s.recv(4096)
         data = data.decode("utf-8")
         datos = data[12:]
+        print(datos)
         if datos == "ne":
             s.send(b'00007adevane')
         elif datos == "a":

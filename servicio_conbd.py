@@ -227,12 +227,14 @@ while True:
 
     elif data[5:6] == "b": #consulta si existe usuario
         data = data[6:]
+        print(data)
         cursor.execute(data)
         resultado = cursor.fetchone()
         if resultado == None:
             s.send(b'00006conbderr')
         else:
             idusuario = resultado[0]
+            print(idusuario)
             largo = 5 + len(str(idusuario))
             enviar = larstr(largo) + "conbd" + str(idusuario)
     
@@ -247,6 +249,7 @@ while True:
             s.send(b'00007conbdne')
         else:
             idevaluacion = resultado[0]
+            print(idevaluacion)
             sentencia = "UPDATE evaluaciones SET nota = " + str(nota) + " WHERE id = " + str(idevaluacion) + ""
             try:
                 cursor.execute(sentencia)
