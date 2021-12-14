@@ -134,7 +134,7 @@ def menu_ramos(user):
     """)
     print("----------------------------------------------------------")
     choice = input("Elija la opción correspondiente: ")
-    if choice == "1": #ver ramos
+    if choice == "1": #ver cursos
         usuario = user
         largo = 5 + 1 + len(usuario)
         texto = larstr(largo) + "adram" + "1" + usuario
@@ -175,7 +175,7 @@ def menu_ramos(user):
                 print("----------------------------------------------------------")
                 return menu_ramos(user)
 
-    elif choice == "2": #agregar ramo
+    elif choice == "2": #agregar curso
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DEL CURSO")
         print("Nombre: ")
@@ -206,9 +206,31 @@ def menu_ramos(user):
             print("Error")
             return menu_ramos(user)
     
-    elif choice == "3": #eliminar ramo
-        pass
-    
+    elif choice == "3": #eliminar curso
+        print("Sus cursos son:")
+        ver_cursos(user)
+        print("Escriba el numero del curso que desea eliminar(0 si desea salir): ")
+        idcurso = input()
+        if idcurso.isnumeric() == False:
+            print("Error")
+            return menu_ramos(user)
+        else:
+            largo = 5 + 1 + len(user) + 3 + len(idcurso)
+            texto = larstr(largo) + "adram" + "3" + user + "---" + idcurso
+            s.send(texto.encode("utf-8"))
+            resp = s.recv(4096)
+            respuesta = resp.decode("utf-8")
+            respuesta = respuesta[12:]
+            if respuesta == "err":
+                print("Error")
+                return menu_evaluaciones(user)
+            elif respuesta == "a":
+                print("Evaluación eliminada")
+                return menu_evaluaciones(user)
+            else:
+                print("Error al eliminar evaluación")
+                return menu_evaluaciones(user)
+
     elif choice == "4": #volver
         menu_sesionini(user)
     
