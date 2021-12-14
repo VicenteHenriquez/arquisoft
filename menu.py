@@ -90,7 +90,7 @@ def menu_sesionini(user):
     print("""
     Bienvenido
     1. Ver perfil
-    2. Ramos
+    2. Cursos
     3. Evaluaciones
     4. Salir
     """)
@@ -127,9 +127,9 @@ def menu_sesionini(user):
 def menu_ramos(user):
     print("----------------------------------------------------------")
     print("""
-    1. Ver ramos
-    2. Agregar ramo
-    3. Eliminar ramo
+    1. Ver cursos
+    2. Agregar curso
+    3. Eliminar curso
     4. Volver
     """)
     print("----------------------------------------------------------")
@@ -177,7 +177,7 @@ def menu_ramos(user):
 
     elif choice == "2": #agregar ramo
         print("----------------------------------------------------------")
-        print("INGRESE LOS DATOS DEL RAMO")
+        print("INGRESE LOS DATOS DEL CURSO")
         print("Nombre: ")
         nombre = str(input())
         print("Descripción: ")
@@ -307,6 +307,8 @@ def menu_evaluaciones(user):
         if not ponderacion:
             ponderacion = "0"
         descripcion = str(input("Descripción: "))
+        if not descripcion:
+            descripcion = "-"
         nota = str(input("Nota(0 a 70): "))
         if not nota:
             nota = "0"
