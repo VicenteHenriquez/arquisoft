@@ -223,13 +223,13 @@ def menu_ramos(user):
             respuesta = respuesta[12:]
             if respuesta == "err":
                 print("Error")
-                return menu_evaluaciones(user)
+                return menu_ramos(user)
             elif respuesta == "a":
-                print("Evaluación eliminada")
-                return menu_evaluaciones(user)
+                print("Curso eliminado")
+                return menu_ramos(user)
             else:
-                print("Error al eliminar evaluación")
-                return menu_evaluaciones(user)
+                print("Error al eliminar curso")
+                return menu_ramos(user)
 
     elif choice == "4": #volver
         menu_sesionini(user)

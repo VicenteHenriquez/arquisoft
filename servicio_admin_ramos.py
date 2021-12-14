@@ -72,25 +72,25 @@ while True:
             s.send(b'00008adramerr')
         else:
             idusuario = datos
-        sentencia = "DELETE FROM cursos WHERE id = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
-        largosql = 5 + 1 + len(sentencia)
-        texto = larstr(largo)+ "conbd" + "d" + sentencia
-        s.send(texto.encode("utf-8"))
-        datarec = s.recv(4096)
-        data = datarec.decode("utf-8")
-        datos = data[12:]
-        if datos == "a":
-            s.send(b'00006adrama')
-        else:
-            s.send(b'00006adrame')
-        sentencia2 = "DELETE FROM evaluaciones WHERE idramo = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
-        largosql = 5 + 1 + len(sentencia2)
-        texto = larstr(largo)+ "conbd" + "d" + sentencia2
-        s.send(texto.encode("utf-8"))
-        datarec = s.recv(4096)
-        data = datarec.decode("utf-8")
-        datos = data[12:]
-        print(datos)
+            sentencia = "DELETE FROM cursos WHERE id = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
+            largosql = 5 + 1 + len(sentencia)
+            texto = larstr(largo)+ "conbd" + "d" + sentencia
+            s.send(texto.encode("utf-8"))
+            datarec = s.recv(4096)
+            data = datarec.decode("utf-8")
+            datos = data[12:]
+            if datos == "a":
+                s.send(b'00006adrama')
+            else:
+                s.send(b'00006adrame')
+            sentencia2 = "DELETE FROM evaluaciones WHERE idramo = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
+            largosql = 5 + 1 + len(sentencia2)
+            texto = larstr(largo)+ "conbd" + "d" + sentencia2
+            s.send(texto.encode("utf-8"))
+            datarec = s.recv(4096)
+            data = datarec.decode("utf-8")
+            datos = data[12:]
+            print(datos)
 
     elif data1 == "4": #ver ramo en especifico
         datos = data.split(",")
