@@ -101,5 +101,3 @@ while True:
         largo = larstr(largo) + "adram" + data
         print(largo)
         s.send(largo.encode("utf-8"))
-    else:
-        pass
