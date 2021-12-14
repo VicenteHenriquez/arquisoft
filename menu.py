@@ -393,17 +393,17 @@ def ver_cursos(user): #funcion para ver cursos
     largo = 5 + 1 + len(user)
     texto = larstr(largo) + "adram" + "1" + user
     s.send(texto.encode("utf-8"))
-    resp = s.recv(4096)
-    respuesta = resp.decode("utf-8")
-    respuesta = respuesta[12:]
-    respuesta = respuesta.split("), (")
-    largresp = len(respuesta)
+    ans = s.recv(4096)
+    respuesta7 = ans.decode("utf-8")
+    respuesta7 = respuesta7[12:]
+    respuesta7 = respuesta7.split("), (")
+    largresp = len(respuesta7)
     print("----------------------------------------------------------")
-    for i in range(len(respuesta)):
+    for i in range(len(respuesta7)):
         if i == largresp-1:
-            print(respuesta[i].strip(")]"))
+            print(respuesta7[i].strip(")]"))
         else:
-            print(respuesta[i])
+            print(respuesta7[i])
     print("----------------------------------------------------------")
 
 def ver_evaluaciones(user): #funcion para ver evaluaciones
