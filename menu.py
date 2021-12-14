@@ -214,18 +214,21 @@ def menu_ramos(user):
         if idcurso.isnumeric() == False:
             print("Error")
             return menu_ramos(user)
+        elif idcurso == "0":
+            return menu_ramos(user)
         else:
             largo = 5 + 1 + len(user) + 3 + len(idcurso)
             texto = larstr(largo) + "adram" + "3" + user + "---" + idcurso
+            print(texto)
             s.send(texto.encode("utf-8"))
             resp = s.recv(4096)
-            respuesta = resp.decode("utf-8")
-            respuesta = respuesta[12:]
-            print(respuesta)
-            if respuesta == "err":
+            respuesta2 = resp.decode("utf-8")
+            respuesta2 = respuesta2[12:]
+            print(respuesta2)
+            if respuesta2 == "err":
                 print("Error")
                 return menu_ramos(user)
-            elif respuesta == "a":
+            elif respuesta2 == "a":
                 print("Curso eliminado")
                 return menu_ramos(user)
             else:
