@@ -1,7 +1,6 @@
 import socket
 import sys
 import time
-from typing import TextIO
 
 def larstr(largo):
     ceros = 5-len(str(largo))
@@ -93,7 +92,7 @@ while True:
         pass
 
     elif data1 == "4": #modificar nota evaluacion
-        data = data[6:]
+        """data = data[6:]
         data = data.split("---")
         usuario = data[0]
         idevaluacion = data[1]
@@ -126,6 +125,7 @@ while True:
         elif datos == "e":
             s.send(b'00006adevae')
         else:
-            s.send(b'00008adevaerr')
+            s.send(b'00008adevaerr')"""
+        pass
     else:
         pass
