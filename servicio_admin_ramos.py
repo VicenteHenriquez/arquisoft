@@ -63,7 +63,7 @@ while True:
         idcurso = datos[1]
         sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         largosql = 5 + 1 + len(sql)
-        texto = larstr(largo)+ "conbd" + "b" + sql
+        texto = larstr(largosql)+ "conbd" + "b" + sql
         print(texto)
         s.send(texto.encode("utf-8"))
         datarec = s.recv(4096)

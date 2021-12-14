@@ -206,7 +206,8 @@ def menu_ramos(user):
             print("Error")
             return menu_ramos(user)
     
-    elif choice == "3": #eliminar cursos        
+    elif choice == "3": #eliminar cursos
+        ver_cursos(user)        
         print("Escriba el numero del curso que desea eliminar(0 si desea salir): ")
         idcurso = input()
         if idcurso.isnumeric() == False:
