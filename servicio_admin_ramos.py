@@ -76,7 +76,7 @@ while True:
             idusuario = datos
             sentencia = "DELETE FROM cursos WHERE id = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
             largosql = 5 + 1 + len(sentencia)
-            texto = larstr(largo)+ "conbd" + "7" + sentencia
+            texto = larstr(largosql)+ "conbd" + "7" + sentencia
             s.send(texto.encode("utf-8"))
             datarec = s.recv(4096)
             data = datarec.decode("utf-8")
