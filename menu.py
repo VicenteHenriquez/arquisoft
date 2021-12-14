@@ -221,6 +221,7 @@ def menu_ramos(user):
             resp = s.recv(4096)
             respuesta = resp.decode("utf-8")
             respuesta = respuesta[12:]
+            print(respuesta)
             if respuesta == "err":
                 print("Error")
                 return menu_ramos(user)

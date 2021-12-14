@@ -64,17 +64,19 @@ while True:
         sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
         largosql = 5 + 1 + len(sql)
         texto = larstr(largo)+ "conbd" + "b" + sql
+        print(texto)
         s.send(texto.encode("utf-8"))
         datarec = s.recv(4096)
         data = datarec.decode("utf-8")
         datos = data[12:]
+        print(datos)
         if datos == "err":
             s.send(b'00008adramerr')
         else:
             idusuario = datos
             sentencia = "DELETE FROM cursos WHERE id = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
             largosql = 5 + 1 + len(sentencia)
-            texto = larstr(largo)+ "conbd" + "d" + sentencia
+            texto = larstr(largo)+ "conbd" + "7" + sentencia
             s.send(texto.encode("utf-8"))
             datarec = s.recv(4096)
             data = datarec.decode("utf-8")
@@ -83,15 +85,7 @@ while True:
                 s.send(b'00006adrama')
             else:
                 s.send(b'00006adrame')
-            sentencia2 = "DELETE FROM evaluaciones WHERE idramo = '" + idcurso + "' AND idusuario = '" + idusuario + "'"
-            largosql = 5 + 1 + len(sentencia2)
-            texto = larstr(largo)+ "conbd" + "d" + sentencia2
-            s.send(texto.encode("utf-8"))
-            datarec = s.recv(4096)
-            data = datarec.decode("utf-8")
-            datos = data[12:]
-            print(datos)
-
+        
     elif data1 == "4": #ver ramo en especifico
         datos = data.split(",")
         usuario = datos[0][6:]

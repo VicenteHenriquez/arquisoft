@@ -170,7 +170,15 @@ while True:
             s.send(enviar.encode("utf-8"))
     
     elif data[5:6] == "7": #eliminar curso
-        pass
+        data = data[6:]
+        print(data)
+        try:
+            cursor.execute(data)
+            conn.commit()
+            s.send(b'00006conbda')
+        except:
+            conn.rollback()
+            s.send(b'00006conbde')
 
     elif data[5:6] == "8": #visualizacion de evaluaciones
         data = data[6:].split("---")
