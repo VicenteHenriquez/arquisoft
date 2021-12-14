@@ -308,7 +308,7 @@ def menu_evaluaciones(user):
             ponderacion = "0"
         descripcion = str(input("Descripción: "))
         if not descripcion:
-            descripcion = "-"
+            descripcion = "none"
         nota = str(input("Nota(0 a 70): "))
         if not nota:
             nota = "0"
@@ -330,15 +330,42 @@ def menu_evaluaciones(user):
             print("Error al agregar evaluación")
             return menu_evaluaciones(user)
     
-    elif choice == "3":
-        pass
-    elif choice == "4":
+    elif choice == "3": #eliminar evaluacion
+        ver_cursos(user)
+        print("Ingrese el id del curso que desea ver evaluaciones(0 si desea volver): ")
+        ver_evaluaciones(user)
+        print("Ingrese el id de la evaluación que desea eliminar(0 si desea volver): ")
+        idevaluacion = input()
+        if idevaluacion.isnumeric() == False:
+            print("Error")
+            return menu_evaluaciones(user)
+        elif idevaluacion == "0":
+            return menu_evaluaciones(user)
+        else:
+            largo = 5 + 1 + len(user) + 3 + len(str(idevaluacion))
+            texto = larstr(largo) + "adeva" + "3" + user + "---" + str(idevaluacion)
+            s.send(texto.encode("utf-8"))
+            data = s.recv(4096)
+            respuesta = data.decode("utf-8")
+            respuesta = respuesta[12:]
+            if respuesta == "err":
+                print("Error")
+                return menu_evaluaciones(user)
+            elif respuesta == "a":
+                print("Evaluación eliminada")
+                return menu_evaluaciones(user)
+            else:
+                print("Error al eliminar evaluación")
+                return menu_evaluaciones(user)
+    
+    elif choice == "4": #volver
         menu_sesionini(user)
+    
     else:
         print("Opción incorrecta")
         return menu_evaluaciones(user)
 
-def ver_cursos(user):
+def ver_cursos(user): #funcion para ver cursos
     largo = 5 + 1 + len(user)
     texto = larstr(largo) + "adram" + "1" + user
     s.send(texto.encode("utf-8"))
@@ -355,5 +382,38 @@ def ver_cursos(user):
             print(respuesta[i])
     print("----------------------------------------------------------")
 
+def ver_evaluaciones(user): #funcion para ver evaluaciones
+    idcurso = input()
+    if idcurso.isnumeric() == False:
+        print("Error")
+        return menu_evaluaciones(user)
+    else:
+        if idcurso == "0":
+            return menu_evaluaciones(user)
+        else:
+            largo = 5 + 1 + len(user) + 3 + len(idcurso)
+            texto = larstr(largo) + "adeva" + "1" + user + "---" + idcurso
+            s.send(texto.encode("utf-8"))
+            resp = s.recv(4096)
+            respuesta = resp.decode("utf-8")
+            respuesta = respuesta[12:]
+            if respuesta == "err":
+                print("Error")
+                return menu_evaluaciones(user)
+            else:
+                respuesta = respuesta.split("---")
+                nombrecurso = respuesta[0]
+                evaluaciones = respuesta[1]
+                evaluaciones = evaluaciones.split("), (")
+                largoev = len(evaluaciones)
+                print("----------------------------------------------------------")
+                print("Evaluaciones del curso " + nombrecurso)
+                print("Orden: ID, Nombre, Fecha, Ponderación, Descripción, Nota")
+                for i in range(len(evaluaciones)):
+                    if i == largoev-1:
+                        print(evaluaciones[i].strip(")]"))
+                    else:
+                         print(evaluaciones[i])
+                print("----------------------------------------------------------")
 
 menu_4_options()    

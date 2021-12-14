@@ -260,3 +260,14 @@ while True:
                 conn.rollback()
                 s.send(b'00006conbde')
 
+    elif data[5:6] == "d": #eliminar evaluacion
+        data = data[6:]
+        print(data)
+        try:
+            cursor.execute(data)
+            conn.commit()
+            s.send(b'00006conbda')
+        except:
+            conn.rollback()
+            s.send(b'00006conbde')
+

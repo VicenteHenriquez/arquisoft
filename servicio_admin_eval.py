@@ -89,7 +89,31 @@ while True:
                 s.send(b'00008adevae')
         pass
     elif data1 == "3": #elimina evaluacion
-        pass
+        data = data[6:]
+        data = data.split("---")
+        usuario = data[0]
+        idevaluacion = data[1]
+        sql = "SELECT id FROM usuario WHERE correo = '" + usuario + "'"
+        largo = 5 + 1 + len(sql)
+        texto = larstr(largo) + "conbd" + "b" + sql
+        s.send(texto.encode("utf-8"))
+        data = s.recv(4096)
+        data = data.decode("utf-8")
+        datos = data[12:]
+        if datos == "err":
+            s.send(b'00008adevaerr')
+        else:
+            idusuario = datos
+        sentencia = "DELETE FROM evaluaciones WHERE id = '" + idevaluacion + "' AND idusuario = '" + idusuario + "'"
+        largo = 5 + 1 + len(sentencia)
+        texto = larstr(largo) + "conbd" + "d" + sentencia
+        s.send(texto.encode("utf-8"))
+        data = s.recv(4096)
+        data = data.decode("utf-8")
+        if data[12:] == "a":
+            s.send(b'00006adevaa')
+        else:
+            s.send(b'00006adevae')
 
     else:
         pass
