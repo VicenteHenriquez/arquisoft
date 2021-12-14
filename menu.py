@@ -226,7 +226,7 @@ def menu_evaluaciones(user):
     """)
     print("----------------------------------------------------------")
     choice = input("Elija la opción correspondiente: ")
-    if choice == "1":
+    if choice == "1": #ver evaluaciones y editar nota
         ver_cursos(user)
         print("Ingrese el id del curso que desea ver evaluaciones(0 si desea volver): ")
         idcurso = input()
@@ -296,15 +296,20 @@ def menu_evaluaciones(user):
                                 return menu_evaluaciones(user)
                     return menu_evaluaciones(user)
 
-    elif choice == "2":
+    elif choice == "2": #agregar evaluacion
+        ver_cursos(user)
         print("----------------------------------------------------------")
         print("INGRESE LOS DATOS DE LA  NUEVA EVALUACIÓN: ")
         ramo = str(input("Curso: "))
         nombre = str(input("Nombre: "))
         fecha = str(input("Fecha(dd/mm/aaaa): "))
         ponderacion = str(input("Ponderación(0-100): "))
+        if not ponderacion:
+            ponderacion = "0"
         descripcion = str(input("Descripción: "))
-        nota = str(input("Nota(00 a 70, si no tiene, colocar 00): "))
+        nota = str(input("Nota(0 a 70): "))
+        if not nota:
+            nota = "0"
         print("----------------------------------------------------------")
         usuario = user
         largo = 5 + 1 + len(usuario) + 3 + len(nombre) + 3 + len(fecha) + 3 + len(ponderacion) + 3 + len(descripcion) + 3 + len(nota) + 3 + len(ramo)
