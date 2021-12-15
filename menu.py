@@ -185,6 +185,8 @@ def menu_ramos(user):
         nombre = str(input())
         print("Descripción: ")
         descripcion = str(input())
+        if not descripcion:
+            descripcion = "No hay descripcion"
         print("Profesor: ")
         profesor = str(input())
         print("----------------------------------------------------------")
@@ -221,7 +223,7 @@ def menu_ramos(user):
         else:
             largo = 5 + 1 + len(user) + 3 + len(idcurso)
             texto = larstr(largo) + "adram" + "3" + user + "---" + idcurso
-            print(texto)
+            #print(texto)
             s.send(texto.encode("utf-8"))
             resp = s.recv(4096)
             respuesta2 = resp.decode("utf-8")
